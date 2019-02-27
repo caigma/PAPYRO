@@ -1,0 +1,28 @@
+.signup input,
+label,
+select {
+	margin: 5px 0;
+	padding: 5px;
+}
+
+.container-signup {
+	margin: 150px;
+}
+
+.container-signup p {
+	margin-left: 150px;
+}
+
+input[type=submit] {
+	color: black;
+	background-color: whitesmoke;
+	font-style: italic;
+
+	border-radius: 4px;
+	border: 2px solid gray;
+
+	margin: 5px 0;
+	padding: 5px;
+	height: 25px;
+	border-radius: 10px;
+}
