@@ -46,6 +46,7 @@ function whatIsYouRol(email) {
 router.post('/login', (req, res, next) => {
 	whatIsYouRol(req.body.email)
 		.then((rol) => {
+			console.log(rol);
 			passport.authenticate(rol, (err, theUser, failureDetails) => {
 				if (err) {
 					res.status(500).json({ message: 'Something went wrong authenticating user' });
@@ -53,6 +54,7 @@ router.post('/login', (req, res, next) => {
 				}
 
 				if (!theUser) {
+					console.log();
 					// "failureDetails" contains the error messages
 					// from our logic in "LocalStrategy" { message: '...' }.
 					res.status(401).json(failureDetails);
@@ -80,7 +82,7 @@ router.post('/login', (req, res, next) => {
 
 router.post('/signup/us', (req, res, next) => {
 	console.log(req.body);
-	const { username, email, password } = req.body;
+	const { username, email, password } = req.body.user;
 
 	if (username === '' || email === '' || password === '') {
 		res.status(400).json({ message: 'Provide username, email and password' });
@@ -131,7 +133,7 @@ router.post('/signup/us', (req, res, next) => {
 
 router.post('/signup/pr', (req, res, next) => {
 	console.log(req.body);
-	const { printerName, email, password } = req.body;
+	const { printerName, email, password } = req.body.printer;
 
 	if (printerName === '' || email === '' || password === '') {
 		res.status(400).json({ message: 'Provide username, email and password' });

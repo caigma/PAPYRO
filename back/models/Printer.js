@@ -8,10 +8,10 @@ const printerSchema = new Schema(
 		passport: String,
 		NIF: String,
 		share: Boolean,
-		toPrint: [ Number ],
-		printed: [ Number ],
+		toPrint: Boolean,
+		printed: Boolean,
 		orderId: { type: Schema.Types.ObjectId, ref: 'Order' },
-		rol: 'printer'
+		rol: String
 	},
 	{
 		timestamps: {

@@ -38,7 +38,7 @@ passport.use(
 			passwordField: 'password'
 		},
 		(email, password, done) => {
-			User.findOne({ email })
+			Printer.findOne({ email })
 				.then((foundUser) => {
 					if (!foundUser) {
 						done(null, false, { message: 'Incorrect email' });
