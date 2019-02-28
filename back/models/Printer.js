@@ -3,14 +3,15 @@ const Schema = mongoose.Schema;
 
 const printerSchema = new Schema(
 	{
+		printerName: String,
 		email: String,
 		passport: String,
-		printerName: String,
 		NIF: String,
 		share: Boolean,
-		toPrint: [ number ],
-		printed: [ number ],
-		orderId: { type: Schema.Types.ObjectId, ref: 'Order' }
+		toPrint: [ Number ],
+		printed: [ Number ],
+		orderId: { type: Schema.Types.ObjectId, ref: 'Order' },
+		rol: 'printer'
 	},
 	{
 		timestamps: {

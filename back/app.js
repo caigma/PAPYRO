@@ -29,6 +29,7 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
 app.use(
 	cors({
 		credentials: true,
@@ -82,6 +83,7 @@ app.use(
 		store: new MongoStore({ mongooseConnection: mongoose.connection })
 	})
 );
+
 app.use(flash());
 require('./passport')(app);
 
@@ -92,5 +94,9 @@ app.use('/', index);
 app.use('/auth', router);
 
 app.use('/api', require('./routes/file-upload-routes'));
+
+app.use((req, res, next) => {
+	res.sendFile(__dirname + '/public/index.html');
+});
 
 module.exports = app;
