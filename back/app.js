@@ -16,6 +16,9 @@ const cors = require('cors');
 const router = require('./routes/authService');
 const passport = require('passport');
 
+console.log('process.env.DBURL');
+console.log(process.env.DBURL);
+
 mongoose
 	.connect(`${process.env.DBURL}`, { useNewUrlParser: true })
 	.then((x) => {
