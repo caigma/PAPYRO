@@ -7,22 +7,22 @@ import { Redirect } from 'react-router-dom';
 class SignupPro extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { username: '', email: '', password: '', redirectLogin: false };
+		this.state = { printerName: '', email: '', password: '', redirectLogin: false };
 		this.service = new AuthService();
 	}
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		const username = this.state.username;
+		const printerName = this.state.printerName;
 		const email = this.state.email;
 		const password = this.state.password;
 
 		//aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
 		this.service
-			.signupPro(username, email, password)
+			.signupPro(printerName, email, password)
 			.then((response) => {
 				this.setState({
-					username: '',
+					printerName: '',
 					email: '',
 					password: '',
 					redirectLogin: true
@@ -35,7 +35,7 @@ class SignupPro extends Component {
 			})
 			.catch((error) => {
 				this.setState({
-					username: username,
+					printerName: printerName,
 					email: email,
 					password: password,
 
@@ -60,9 +60,15 @@ class SignupPro extends Component {
 					<h2>Sign Up</h2>
 					<form className="signup" onSubmit={this.handlerSubmit}>
 						<label>Printer Name</label>
-						<input id="username" type="text" name="username" onChange={(e) => this.handlerChange(e)} />
+						<input
+							id="printerName"
+							type="text"
+							name="printerName"
+							onChange={(e) => this.handlerChange(e)}
+						/>
 						<label>Email</label>
 						<input id="email" type="email" name="email" onChange={(e) => this.handlerChange(e)} />
+
 						<label>Password</label>
 						<input type="password" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
 
