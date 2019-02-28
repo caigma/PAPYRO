@@ -13,13 +13,15 @@ class SignupPro extends Component {
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		const printerName = this.state.printerName;
-		const email = this.state.email;
-		const password = this.state.password;
+		const printer = {
+			printerName: this.state.printerName,
+			email: this.state.email,
+			password: this.state.password
+		};
 
 		//aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
 		this.service
-			.signupPro(printerName, email, password)
+			.signupPro(printer)
 			.then((response) => {
 				this.setState({
 					printerName: '',
@@ -34,13 +36,7 @@ class SignupPro extends Component {
 				this.props.getUser(response.user);
 			})
 			.catch((error) => {
-				this.setState({
-					printerName: printerName,
-					email: email,
-					password: password,
-
-					error: true
-				});
+				console.log(error);
 			});
 	};
 

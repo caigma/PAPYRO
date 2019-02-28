@@ -6,9 +6,8 @@ import AuthService from './components/service/AuthService';
 import Home from './components/contents/Home';
 import Navbar from './components/navbar/Navbar';
 import UserPrinter from './components/userPrinter/UserPrinter';
-
-import './App.css';
 import SignupPro from './components/auth/SignupPro';
+import './App.css';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {

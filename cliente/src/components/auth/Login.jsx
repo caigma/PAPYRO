@@ -15,9 +15,10 @@ class Login extends Component {
 		event.preventDefault();
 		const email = this.state.email;
 		const password = this.state.password;
+		const rol = this.state.rol;
 
 		this.service
-			.login(email, password)
+			.login(email, password, rol)
 			.then((response) => {
 				this.setState({
 					email: email,

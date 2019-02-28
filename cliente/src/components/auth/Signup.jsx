@@ -9,17 +9,20 @@ class Signup extends Component {
 		super(props);
 		this.state = { username: '', email: '', password: '', redirectLogin: false };
 		this.service = new AuthService();
+		this.user = {};
 	}
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		const username = this.state.username;
-		const email = this.state.email;
-		const password = this.state.password;
+		const user = {
+			username: this.state.username,
+			email: this.state.email,
+			password: this.state.password
+		};
 
 		//aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
 		this.service
-			.signup(username, email, password)
+			.signup(user)
 			.then((response) => {
 				this.setState({
 					username: '',
@@ -34,13 +37,7 @@ class Signup extends Component {
 				this.props.getUser(response.user);
 			})
 			.catch((error) => {
-				this.setState({
-					username: username,
-					email: email,
-					password: password,
-
-					error: true
-				});
+				console.log(error);
 			});
 	};
 
