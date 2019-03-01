@@ -20,6 +20,7 @@ class Navbar extends Component {
 
 	render() {
 		if (this.state.loggedInUser) {
+			console.log('ESTOY EN NAVBAR Y LOGGEADO');
 			return (
 				<nav className="navbar">
 					<ul>
@@ -28,7 +29,10 @@ class Navbar extends Component {
 							<a onClick={this.handleLogout}>Logout</a>
 						</li>
 						<li>
-							<Link to="/profile/:_id">Edit Profile</Link>
+							<Link to="/allphotos">Home</Link>
+						</li>
+						<li>
+							<Link to="/editprofile/:_id">Edit Profile</Link>
 						</li>
 					</ul>
 				</nav>
@@ -39,7 +43,7 @@ class Navbar extends Component {
 					<nav className="navbar">
 						<ul>
 							<li>
-								<Link to="/signup/up">Signup</Link>
+								<Link to="/signup">Signup</Link>
 							</li>
 							<li>
 								<Link to="/login">Login</Link>

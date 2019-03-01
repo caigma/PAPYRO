@@ -7,29 +7,36 @@ import { Redirect } from 'react-router-dom';
 class Signup extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { username: '', email: '', password: '', redirectLogin: false };
+		this.state = { role: '', username: '', email: '', password: '', redirect: false };
 		this.service = new AuthService();
-		this.user = {};
 	}
+
+	// redirect = () => {};
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		const user = {
-			username: this.state.username,
-			email: this.state.email,
-			password: this.state.password
-		};
+
+		const role = this.state.role;
+		const username = this.state.username;
+		const email = this.state.email;
+		const password = this.state.password;
 
 		//aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
 		this.service
-			.signup(user)
+			.signup(role, username, email, password)
 			.then((response) => {
-				this.setState({
-					username: '',
-					email: '',
-					password: '',
-					redirectLogin: true
-				});
+				this.setState(
+					{
+						role: '',
+						username: '',
+						email: '',
+						password: '',
+						redirect: true
+					}
+					// () => {
+					// 	this.redirect();
+					// }
+				);
 
 				//aquí elevamos el nuevo usuario una vez creado a App usando getUser via props
 				//por tanto, informamos a App de que el nuevo usuario ha sido creado, provocando un re-render
@@ -37,17 +44,24 @@ class Signup extends Component {
 				this.props.getUser(response.user);
 			})
 			.catch((error) => {
-				console.log(error);
+				this.setState({
+					role: role,
+					username: username,
+					email: email,
+					password: password,
+					error: true
+				});
 			});
 	};
 
 	handlerChange = (event) => {
+		console.log(event.target.value);
 		const { name, value } = event.target;
 		this.setState({ ...this.state, [name]: value });
 	};
 
 	render() {
-		if (this.state && this.state.redirectLogin) {
+		if (this.state && this.state.redirect) {
 			return <Redirect to="/login" />;
 		}
 
@@ -56,10 +70,18 @@ class Signup extends Component {
 				<div className="allform">
 					<h2>Sign Up</h2>
 					<form className="signup" onSubmit={this.handlerSubmit}>
+						<label>Professional Printer</label>
+
+						<input type="radio" name="role" value="printer" onChange={(e) => this.handlerChange(e)} />
+						<label>User</label>
+						<input type="radio" name="role" value="user" onChange={(e) => this.handlerChange(e)} />
+
 						<label>Username</label>
 						<input id="username" type="text" name="username" onChange={(e) => this.handlerChange(e)} />
+
 						<label>Email</label>
-						<input id="email" type="email" name="email" onChange={(e) => this.handlerChange(e)} />
+						<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
+
 						<label>Password</label>
 						<input type="password" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
 

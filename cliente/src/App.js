@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+
+import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import AuthService from './components/service/AuthService';
-import Home from './components/contents/Home';
+// import Home from './components/contents/Home';
 import Navbar from './components/navbar/Navbar';
-import UserPrinter from './components/userPrinter/UserPrinter';
-import SignupPro from './components/auth/SignupPro';
-import './App.css';
+import AllPhotosUser from './components/contents/AllPhotosUser';
+import EditProfile from './components/auth/EditProfile.jsx';
+import AlbumsList from './components/contents/AlbumsList';
+import AddAlbum from './components/contents/AddAlbum';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -18,6 +21,8 @@ class App extends Component {
 		this.state = { loggedInUser: null };
 		this.service = new AuthService();
 	}
+
+	// viene de login.jsx >>>> this.props.getUser(response.user)
 
 	getUser = (userObj) => {
 		this.setState({
@@ -56,14 +61,20 @@ class App extends Component {
 
 		//aqui hacemos rendering condicional dependiendo de si tenemos un usuario logeado o no
 		if (this.state.loggedInUser) {
+			console.log(this.state.loggedInUser);
 			//en este caso mostramos los contenidos ya que hay usuario
 			return (
 				<div className="padre">
 					<header className="header">
 						<Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
-						{/* aqui simplemente se muestra un lorem ipsum genérico para que veáis contenidos que solo se muestran a usuarios logeados */}
-						<Home />
 					</header>
+					<Switch>
+						{/* <Home userInSession={this.state.loggedInUser} /> */}
+						<Route exact path="/allphotos" component={AllPhotosUser} />
+						<Route exact path="/editprofile/:_id" component={EditProfile} />
+						<Route exact path="/albums-list" component={AlbumsList} />
+						<Route exact path="/add-album" component={AddAlbum} />
+					</Switch>
 				</div>
 			);
 		} else {
@@ -74,10 +85,8 @@ class App extends Component {
 						<Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
 
 						<Switch>
-							<Route exact path="/signup/pr" render={() => <SignupPro getUser={this.getUser} />} />
-							<Route exact path="/signup/us" render={() => <Signup getUser={this.getUser} />} />
+							<Route exact path="/signup" render={() => <Signup getUser={this.getUser} />} />
 							<Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
-							<Route exact path="/signup/up" render={() => <UserPrinter />} />
 						</Switch>
 					</header>
 				</div>

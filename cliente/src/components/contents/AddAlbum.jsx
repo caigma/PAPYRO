@@ -1,0 +1,75 @@
+import React, { Component } from 'react';
+import AlbumService from '../service/AlbumService';
+import { Redirect } from 'react-router-dom';
+import './AddAlbum.css';
+
+class AddAlbum extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			title: '',
+			description: '',
+			photos: [],
+			owner: ''
+		};
+		this.AlbumService = new AlbumService();
+		this.addAlbum();
+	}
+
+	addAlbum = (newAlbum) => {
+		this.AlbumService.addAlbum().then();
+		let newState = {
+			...this.state
+		};
+
+		this.setState(newAlbum);
+	};
+
+	handlerChange = (e) => {
+		let inputName = e.target.name;
+		let inputValue = e.target.value;
+		this.setState({ ...this.state, [inputName]: inputValue });
+	};
+
+	redirect = () => {};
+
+	//
+	handlerSubmit = (e) => {
+		e.preventDefault();
+		let { title, description } = this.state;
+
+		this.allBeersService.addNewAlbum({ title, description }).then((response) => {
+			this.setState({
+				...this.state,
+				title: '',
+				description: ''
+			});
+		});
+	};
+
+	render() {
+		return (
+			<div className="container-addAlbum">
+				<form className="form-addAlbum" onSubmit={this.handlerSubmit}>
+					<input
+						type="text"
+						placeholder="Album's Title"
+						name="title"
+						onChange={(e) => this.handlerChange(e)}
+					/>
+					<input
+						type="text"
+						placeholder="Description"
+						name="description"
+						onChange={(e) => this.handlerChange(e)}
+					/>
+
+					<input type="submit" value="Add Album" />
+					{this.state.redirect ? <Redirect to="/albums-list" /> : ''}
+				</form>
+			</div>
+		);
+	}
+}
+
+export default AddAlbum;

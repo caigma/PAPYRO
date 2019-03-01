@@ -15,10 +15,9 @@ class Login extends Component {
 		event.preventDefault();
 		const email = this.state.email;
 		const password = this.state.password;
-		const rol = this.state.rol;
 
 		this.service
-			.login(email, password, rol)
+			.login(email, password)
 			.then((response) => {
 				this.setState({
 					email: email,
@@ -46,17 +45,17 @@ class Login extends Component {
 
 	render() {
 		if (this.state.redirect) {
-			return <Redirect to="/home" />;
+			return <Redirect to="/allphotos" />;
 		}
 		return (
 			<div className="container-login">
 				<h2>Login</h2>
 				<form className="signup" onSubmit={this.handlerSubmit}>
 					<label>Email</label>
-					<input id="email" type="email" name="email" onChange={(e) => this.handlerChange(e)} />
+					<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
 
 					<label>Password</label>
-					<input type="password" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
+					<input type="text" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
 
 					<input type="submit" value="Log in" />
 				</form>
