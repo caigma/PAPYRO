@@ -3,13 +3,17 @@ const Schema = mongoose.Schema;
 
 const photoSchema = new Schema(
 	{
-		imageURL: String,
-		thumbnail: String,
-		imageName: String,
-		authorId: { type: Schema.Types.ObjectId, ref: 'User' },
-		share: Boolean,
-		toPrint: Boolean,
-		printed: Boolean
+		imageUrl: String,
+		thumbnailUrl: String,
+		name: String,
+		description: String,
+		hastags: [ String ],
+		owner: { type: Schema.Types.ObjectId, ref: 'User' },
+		album: { type: Schema.Types.ObjectId, ref: 'Album' },
+		share: { type: Boolean, default: false },
+		public: { type: Boolean, default: false },
+		toPrint: { type: Boolean, default: false },
+		printed: { type: Boolean, default: false }
 	},
 	{
 		timestamps: {

@@ -14,13 +14,11 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const cors = require('cors');
 const router = require('./routes/authService');
+const routeralbum = require('./routes/album');
 const passport = require('passport');
 
-console.log('process.env.DBURL');
-console.log(process.env.DBURL);
-
 mongoose
-	.connect(`${process.env.DBURL}`, { useNewUrlParser: true })
+	.connect('mongodb://localhost/profiles', { useNewUrlParser: true })
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 	})
@@ -32,7 +30,6 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-
 app.use(
 	cors({
 		credentials: true,
@@ -47,8 +44,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
-
-// para routes de CLODINARY
 
 // Express View engine setup
 
@@ -86,17 +81,15 @@ app.use(
 		store: new MongoStore({ mongooseConnection: mongoose.connection })
 	})
 );
-
 app.use(flash());
 require('./passport')(app);
 
 const index = require('./routes/index');
-
 app.use('/', index);
 
 app.use('/auth', router);
 
-app.use('/api', require('./routes/file-upload-routes'));
+app.use('/album', routeralbum);
 
 app.use((req, res, next) => {
 	res.sendFile(__dirname + '/public/index.html');
