@@ -4,7 +4,6 @@ const Album = require('../models/album.js');
 const routeralbum = express.Router();
 
 routeralbum.post('/', (req, res, next) => {
-	console.log(req.body);
 	Album.create({
 		title: req.body.title,
 		description: req.body.description,

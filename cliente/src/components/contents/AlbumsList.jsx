@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AlbumService from '../service/AlbumService';
 import { NavLink } from 'react-router-dom';
 import AuthService from '../service/AuthService';
+import axios from 'axios';
 
 class AlbumsList extends Component {
 	constructor(props) {
@@ -66,9 +67,6 @@ class AlbumsList extends Component {
 	};
 
 	render() {
-		// this.fetchUser();
-		console.log(this.state.loggedInUser);
-
 		return (
 			<div className="albums-list">
 				{this.state.albums.map((album) => (
@@ -76,7 +74,7 @@ class AlbumsList extends Component {
 						<NavLink
 							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
 							className="item-2"
-							to={`/albums/${album._id}`}
+							to={`/albums-list/${album._id}`}
 							key={album._id}
 						>
 							<div className="eachAlbum">

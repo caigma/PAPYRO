@@ -23,7 +23,7 @@ export default class AlbumService {
 			.then((response) => response.data);
 	};
 
-	getOneAlbum = () => {
-		return this.service.get('/album/${params.id', { withCredentials: true }).then((response) => response.data);
+	getSingleAlbum = () => {
+		return this.service.get('/album/${params.id}', { withCredentials: true }).then((response) => response.data);
 	};
 }

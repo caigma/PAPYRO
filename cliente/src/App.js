@@ -13,6 +13,7 @@ import EditProfile from './components/auth/EditProfile.jsx';
 import AlbumsList from './components/contents/AlbumsList';
 import AddAlbum from './components/contents/AddAlbum';
 import AllOrders from './components/contentsPrinters/AllOrders';
+import AlbumDetail from './components/contents/AlbumDetail';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -75,13 +76,14 @@ class App extends Component {
 						<Switch>
 							{/* <Home userInSession={this.state.loggedInUser} /> */}
 							<Route exact path="/allphotos" component={AllPhotosUser} />
-							<Route exact path="/editprofile/:_id" component={EditProfile} />
+							<Route exact path="/editprofile/:id" component={EditProfile} />
 							{/* <Route exact path="/albums-list" component={AlbumsList} /> */}
 							<Route
 								exact
 								path="/albums-list"
 								render={() => <AlbumsList userInSession={this.state.loggedInUser} />}
 							/>
+							<Route exact path="/albums-list/:id" component={AlbumDetail} />
 							<Route exact path="/add-album" component={AddAlbum} />
 						</Switch>
 					</div>
