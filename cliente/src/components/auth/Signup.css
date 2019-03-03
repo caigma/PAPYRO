@@ -57,7 +57,8 @@ input[type=submit] {
 }
 
 input[type=text],
-input[type=password] {
+input[type=password],
+input[type=email] {
 	color: black;
 	background-color: whitesmoke;
 	font-style: italic;
@@ -68,4 +69,5 @@ input[type=password] {
 	padding: 5px;
 	height: 25px;
 	border-radius: 10px;
+	background-color: bisque;
 }

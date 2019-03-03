@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const photoSchema = new Schema(
 	{
+		imgName: String,
+		content: String,
 		imageUrl: String,
+		authorId: { type: Schema.Types.ObjectId, ref: 'User' },
 		thumbnailUrl: String,
-		name: String,
-		description: String,
-		hastags: [ String ],
+		tags: String,
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },
 		album: { type: Schema.Types.ObjectId, ref: 'Album' },
 		share: { type: Boolean, default: false },

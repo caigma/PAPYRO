@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 class Login extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { email: '', password: '', redirect: false };
+		this.state = { email: '', password: '', role: '', redirect: false };
 		this.service = new AuthService();
 	}
 
@@ -22,6 +22,7 @@ class Login extends Component {
 				this.setState({
 					email: email,
 					password: password,
+					role: response.role,
 					redirect: true,
 					error: false
 				});
@@ -44,17 +45,31 @@ class Login extends Component {
 	};
 
 	render() {
-		if (this.state.redirect) {
+		if (this.state.redirect && this.state.role === 'user') {
 			return <Redirect to="/allphotos" />;
+		} else if (this.state.redirect && this.state.role === 'printer') {
+			return <Redirect to="/allorders" />;
 		}
 		return (
 			<div className="container-login">
 				<form className="signup" onSubmit={this.handlerSubmit}>
 					<label>Email</label>
-					<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
+					<input
+						id="email"
+						type="text"
+						name="email"
+						required="required"
+						onChange={(e) => this.handlerChange(e)}
+					/>
 
 					<label>Password</label>
-					<input type="text" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
+					<input
+						type="password"
+						id="password"
+						name="password"
+						required="required"
+						onChange={(e) => this.handlerChange(e)}
+					/>
 
 					<input type="submit" value="Log in" />
 				</form>

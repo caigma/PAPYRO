@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import './AlbumDetail.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import AddPhoto from './AddPhoto';
 
 class AlbumDetail extends Component {
 	constructor(props) {
@@ -63,6 +64,7 @@ class AlbumDetail extends Component {
 				<p>{this.state.description}</p>
 				{/* <div>{this.ownershipCheck(this.state)}</div> */}
 				<Link to={'/albums-list'}>Yours Albums</Link>
+				<AddPhoto />
 			</div>
 		);
 	}

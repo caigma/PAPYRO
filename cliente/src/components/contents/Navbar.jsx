@@ -11,7 +11,11 @@ class Navbar extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({ ...this.state, loggedInUser: nextProps['userInSession'] });
+		console.log('ESTOY EN NAVBAR PREGUNTANDO POR nextProps', nextProps);
+		this.setState({
+			...this.state,
+			loggedInUser: nextProps['userInSession']
+		});
 	}
 
 	handleLogout = (e) => {

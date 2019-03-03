@@ -88,7 +88,7 @@ class App extends Component {
 						</Switch>
 					</div>
 				);
-			} else {
+			} else if (this.state.loggedInUser.role === 'printer') {
 				return (
 					<div className="padre">
 						<header className="header">

@@ -75,22 +75,47 @@ class Signup extends Component {
 									type="radio"
 									name="role"
 									value="printer"
+									required="required"
 									onChange={(e) => this.handlerChange(e)}
 								/>
 							</div>
 							<div>
 								<label className="label-radio">User</label>
-								<input type="radio" name="role" value="user" onChange={(e) => this.handlerChange(e)} />
+								<input
+									type="radio"
+									name="role"
+									value="user"
+									required="required"
+									onChange={(e) => this.handlerChange(e)}
+								/>
 							</div>
 						</div>
 						<label className="labeltexto">Username</label>
-						<input id="username" type="text" name="username" onChange={(e) => this.handlerChange(e)} />
+						<input
+							id="username"
+							type="text"
+							name="username"
+							required="required"
+							onChange={(e) => this.handlerChange(e)}
+						/>
 
 						<label className="labeltexto">Email</label>
-						<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
+						<input
+							id="email"
+							type="email"
+							name="email"
+							required="required"
+							onChange={(e) => this.handlerChange(e)}
+						/>
 
 						<label className="labeltexto">Password</label>
-						<input type="password" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
+						<input
+							type="password"
+							id="password"
+							name="password"
+							required="required"
+							onChange={(e) => this.handlerChange(e)}
+						/>
 
 						<input type="submit" value="Create the Account" />
 					</form>
