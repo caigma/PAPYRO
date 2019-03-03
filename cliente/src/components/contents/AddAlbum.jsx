@@ -13,17 +13,16 @@ class AddAlbum extends Component {
 			owner: ''
 		};
 		this.AlbumService = new AlbumService();
-		this.addAlbum();
 	}
 
-	addAlbum = (newAlbum) => {
-		this.AlbumService.addAlbum().then();
-		let newState = {
-			...this.state
-		};
+	// addAlbum = (newAlbum) => {
+	// 	this.AlbumService.addAlbum().then();
+	// 	let newState = {
+	// 		...this.state
+	// 	};
 
-		this.setState(newAlbum);
-	};
+	// 	this.setState(newAlbum);
+	// };
 
 	handlerChange = (e) => {
 		let inputName = e.target.name;
@@ -31,14 +30,13 @@ class AddAlbum extends Component {
 		this.setState({ ...this.state, [inputName]: inputValue });
 	};
 
-	redirect = () => {};
-
-	//
 	handlerSubmit = (e) => {
 		e.preventDefault();
-		let { title, description } = this.state;
+		const title = this.state.title;
 
-		this.allBeersService.addNewAlbum({ title, description }).then((response) => {
+		const description = this.state.description;
+
+		this.AlbumService.addAlbum(title, description).then((response) => {
 			this.setState({
 				...this.state,
 				title: '',

@@ -68,21 +68,29 @@ class Signup extends Component {
 		return (
 			<div className="container-signup">
 				<div className="allform">
-					<h2>Sign Up</h2>
 					<form className="signup" onSubmit={this.handlerSubmit}>
-						<label>Professional Printer</label>
-
-						<input type="radio" name="role" value="printer" onChange={(e) => this.handlerChange(e)} />
-						<label>User</label>
-						<input type="radio" name="role" value="user" onChange={(e) => this.handlerChange(e)} />
-
-						<label>Username</label>
+						<div className="input-radio">
+							<div>
+								<label className="label-radio">Professional Printer</label>
+								<input
+									type="radio"
+									name="role"
+									value="printer"
+									onChange={(e) => this.handlerChange(e)}
+								/>
+							</div>
+							<div>
+								<label className="label-radio">User</label>
+								<input type="radio" name="role" value="user" onChange={(e) => this.handlerChange(e)} />
+							</div>
+						</div>
+						<label className="labeltexto">Username</label>
 						<input id="username" type="text" name="username" onChange={(e) => this.handlerChange(e)} />
 
-						<label>Email</label>
+						<label className="labeltexto">Email</label>
 						<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
 
-						<label>Password</label>
+						<label className="labeltexto">Password</label>
 						<input type="password" id="password" name="password" onChange={(e) => this.handlerChange(e)} />
 
 						<input type="submit" value="Create the Account" />

@@ -4,6 +4,7 @@ const Album = require('../models/album.js');
 const routeralbum = express.Router();
 
 routeralbum.post('/', (req, res, next) => {
+	console.log(req.body);
 	Album.create({
 		title: req.body.title,
 		description: req.body.description,
@@ -19,7 +20,14 @@ routeralbum.post('/', (req, res, next) => {
 });
 
 routeralbum.get('/:_id', (req, res, next) => {
-	Album.findById(req.params.userId).then((album) => {
+	Album.findById(req.params._id).then((album) => {
+		res.json(album);
+	});
+});
+
+// ESTE GET FUNCIONA.
+routeralbum.get('/', (req, res, next) => {
+	Album.find().then((album) => {
 		res.json(album);
 	});
 });

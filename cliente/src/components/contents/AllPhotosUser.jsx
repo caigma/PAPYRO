@@ -1,18 +1,63 @@
 import React, { Component } from 'react';
 import './AllPhotosUser.css';
-import SearchBar from '../SearchBar';
+import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
+import myimage from '../../image/IMG_5208.JPG';
 
 class AllPhotosUser extends Component {
 	render() {
 		return (
-			<div className="all-photos-user">
-				<h2>Componente .AllPhotosUser</h2>
-				<h2>Aqui se ponen todas las fotos del usuario</h2>
-				<h2>Irán de fondo, ocupando toda la pantalla</h2>
+			<div>
+				<div className="all-photos-user">
+					<div className="image-album">
+						<img src={myimage} alt="logo" />
+					</div>
 
-				<SearchBar />
-				<Link to="albums-list">My Albums</Link>
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+					<div className="image-album" />
+				</div>
+				<div className="fixed-search">
+					<div className="two-buttons">
+						<Link
+							className="pruebaLink"
+							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
+							to="albums-list"
+						>
+							My Albums
+						</Link>
+						<button class="buttonPrint">Send to Print</button>
+					</div>
+
+					<SearchBar />
+				</div>
 			</div>
 		);
 	}

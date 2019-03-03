@@ -7,7 +7,23 @@ export default class AlbumService {
 		});
 	}
 
-	addAlbum = (title, description, photos, owner) => {
-		return this.service.post('/signup', { title, description, photos, owner }).then((response) => response.data);
+	addAlbum = (title, description) => {
+		return this.service
+			.post('/album', { title, description }, { withCredentials: true })
+			.then((response) => response.data);
+	};
+
+	getAlbums = () => {
+		return this.service.get('/album', { withCredentials: true }).then((response) => response.data);
+	};
+
+	modifyALbum = (title, description, photos, owner) => {
+		return this.service
+			.put('/album/${this.props.album._id}', { title, description, photos, owner }, { withCredentials: true })
+			.then((response) => response.data);
+	};
+
+	getOneAlbum = () => {
+		return this.service.get('/album/${params.id', { withCredentials: true }).then((response) => response.data);
 	};
 }

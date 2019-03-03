@@ -49,7 +49,6 @@ class Login extends Component {
 		}
 		return (
 			<div className="container-login">
-				<h2>Login</h2>
 				<form className="signup" onSubmit={this.handlerSubmit}>
 					<label>Email</label>
 					<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />

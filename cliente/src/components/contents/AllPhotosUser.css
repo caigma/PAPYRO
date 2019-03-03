@@ -1,3 +1,55 @@
 .all-photos-user {
-	margin: 150px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-top: 35px;
+}
+
+.image-album img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.image-album {
+	width: 140px;
+	height: 100px;
+	background-color: aqua;
+	margin: 4px;
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+.fixed-search {
+	position: fixed;
+	left: 0px;
+	bottom: 80px;
+	width: 100%;
+	background: whitesmoke;
+	display: flex;
+	flex-direction: column;
+}
+
+.two-buttons {
+	display: flex;
+	padding: 10px;
+	justify-content: space-around;
+}
+
+.pruebaLink {
+	background-color: palevioletred;
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 12px;
+}
+
+.buttonPrint {
+	padding: 10px 0;
+	background-color: palevioletred;
+	border-radius: 5px;
+
+	padding: 10px;
 }
