@@ -1,27 +1,29 @@
 const express = require('express');
 require('dotenv');
-const Photo = require('../models/photo.js');
-const uploadCloud = require('../config/cloudinary.js');
+// const Photo = require('../models/photo.js');
+// const uploadCloud = require('../config/cloudinary.js');
 const router = express.Router();
 
 //actual write to cloudinary via the middleware specified in ../config/cloudinary.js
 //INVESTIGAR: UPLOADCLOUD.SINGLE('PHOTO') - MULTIPLE
-router.post('/api/photo', uploadCloud.single('photo'), (req, res, next) => {
-	const imgName = req.file.originalname;
-	const newPhoto = new Photo({ imgName });
-	console.log(req.file.url);
 
-	//actual write in mongo using mongoose
-	newPhoto
-		.save()
-		.then((photo) => {
-			console.log('BACK EN INDEX.JS VIENDO REQ.FILE.URL', req.file.url);
-			res.json({ url: req.file.url, photo: photo });
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-});
+// ESTE IBA BIEN
+// router.post('/api/photo', uploadCloud.single('photo'), (req, res, next) => {
+// 	const imgName = req.file.originalname;
+// 	const newPhoto = new Photo({ imgName });
+// 	console.log(req.file.url);
+
+// 	//actual write in mongo using mongoose
+// 	newPhoto
+// 		.save()
+// 		.then((photo) => {
+// 			console.log('BACK EN INDEX.JS VIENDO REQ.FILE.URL', req.file.url);
+// 			res.json({ url: req.file.url, photo: photo });
+// 		})
+// 		.catch((error) => {
+// 			console.log(error);
+// 		});
+// });
 
 // routeralbum.post('/album/:id', uploadPhoto.single('imageUrl'), (req, res, next) => {
 // 	const newPhoto = new Photo({

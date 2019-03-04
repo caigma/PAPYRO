@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-	baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api',
+	baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/',
 	withCredentials: true
 });
 
@@ -18,11 +18,11 @@ export default {
 	// You can have as many methods as you want
 
 	// Method addPicture
-	addPicture(file) {
+	addPicture(file, albumid, ownerid) {
 		const formData = new FormData();
 		formData.append('photo', file);
 		return service
-			.post('/photo', formData, {
+			.post('/album/photo/' + albumid + '/' + ownerid, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}

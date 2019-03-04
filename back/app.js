@@ -15,6 +15,7 @@ const flash = require('connect-flash');
 const cors = require('cors');
 const router = require('./routes/authService');
 const routeralbum = require('./routes/album');
+const routerprinter = require('./routes/printer');
 const passport = require('passport');
 
 mongoose
@@ -90,6 +91,8 @@ app.use('/', index);
 app.use('/auth', router);
 
 app.use('/album', routeralbum);
+
+app.use('/printer', routerprinter);
 
 app.use((req, res, next) => {
 	res.sendFile(__dirname + '/public/index.html');

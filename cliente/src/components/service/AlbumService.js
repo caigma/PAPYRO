@@ -13,17 +13,25 @@ export default class AlbumService {
 			.then((response) => response.data);
 	};
 
-	getAlbums = () => {
-		return this.service.get('/album', { withCredentials: true }).then((response) => response.data);
+	getAlbums = (user) => {
+		return this.service.post(`/album/List`, { user }).then((response) => response.data);
 	};
 
 	modifyALbum = (title, description, photos, owner) => {
 		return this.service
-			.put('/album/${this.props.album._id}', { title, description, photos, owner }, { withCredentials: true })
+			.put(`/album/${this.props.album._id}`, { title, description, photos, owner }, { withCredentials: true })
 			.then((response) => response.data);
 	};
 
-	getSingleAlbum = () => {
-		return this.service.get('/album/${params.id}', { withCredentials: true }).then((response) => response.data);
+	getPhotosAlbumId = (albumid) => {
+		return this.service.post('/album/listphotos', { albumid }).then((response) => response.data);
 	};
+
+	// getSingleAlbum = () => {
+	// 	return this.service.get(`/album/${params.id}`, { withCredentials: true }).then((response) => response.data);
+	// };
+
+	// getAllUsers = () => {
+	// 	return this.service.get('/printers').then((response) => response.data);
+	// };
 }

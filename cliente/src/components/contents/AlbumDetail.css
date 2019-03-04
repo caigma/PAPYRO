@@ -1,3 +1,52 @@
 .container-album-detail {
-	margin: 100px;
+	/* ya veremos */
 }
+
+.titleDoIt {
+	padding: 5px;
+	font-size: 15px;
+}
+
+/* .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+} */
+
+input[type=submit] {
+	color: red;
+	background-color: whitesmoke;
+	font-style: italic;
+	border-radius: 2px;
+	border: 1px solid gray;
+	width: 60px;
+	margin: 2px;
+	font-size: 8px;
+	height: 20px;
+}
+
+.optionsImg select {
+	color: black;
+	background-color: whitesmoke;
+	font-style: italic;
+	border: 1px solid gray;
+
+	border-radius: 2px;
+	margin: 2px;
+	font-size: 8px;
+}
+
+.imageAndText {
+	background-color: wheat;
+}
+
+/* .form-optionsImg {
+	display: block;
+}
+
+img + .form-optionsImg {
+	display: none;
+} */

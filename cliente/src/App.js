@@ -14,6 +14,7 @@ import AlbumsList from './components/contents/AlbumsList';
 import AddAlbum from './components/contents/AddAlbum';
 import AllOrders from './components/contentsPrinters/AllOrders';
 import AlbumDetail from './components/contents/AlbumDetail';
+import AllPrinters from './components/contentsPrinters/AllPrinters';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -25,12 +26,7 @@ class App extends Component {
 		this.service = new AuthService();
 	}
 
-	// viene de login.jsx >>>> this.props.getUser(response.user)
-
-	// changeUser = (user) => {
-	// 	this.setState({ ...this.state, user });
-	// };
-
+	// CUANDO ALGUIEN HAGA LOGIN, SE LLAMA A GETUSER Y SE VUELCA LA INFO DEL USUARIO EN App.js
 	getUser = (userObj) => {
 		this.setState({
 			loggedInUser: userObj
@@ -84,7 +80,9 @@ class App extends Component {
 								render={() => <AlbumsList userInSession={this.state.loggedInUser} />}
 							/>
 							<Route exact path="/albums-list/:id" component={AlbumDetail} />
+
 							<Route exact path="/add-album" component={AddAlbum} />
+							<Route exact path="/printers" component={AllPrinters} />
 						</Switch>
 					</div>
 				);

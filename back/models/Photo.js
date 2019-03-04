@@ -6,7 +6,6 @@ const photoSchema = new Schema(
 		imgName: String,
 		content: String,
 		imageUrl: String,
-		authorId: { type: Schema.Types.ObjectId, ref: 'User' },
 		thumbnailUrl: String,
 		tags: String,
 		owner: { type: Schema.Types.ObjectId, ref: 'User' },

@@ -46,14 +46,12 @@ class AllPhotosUser extends Component {
 				</div>
 				<div className="fixed-search">
 					<div className="two-buttons">
-						<Link
-							className="pruebaLink"
-							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
-							to="albums-list"
-						>
+						<Link className="pruebaLink" style={{ textDecoration: 'none' }} to="albums-list">
 							My Albums
 						</Link>
-						<button class="buttonPrint">Send to Print</button>
+						<Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
+							Send to Print
+						</Link>
 					</div>
 
 					<SearchBar />

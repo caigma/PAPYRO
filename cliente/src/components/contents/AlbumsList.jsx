@@ -10,48 +10,18 @@ class AlbumsList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loggedinUser: null,
+			loggedinUser: this.props.userInSession,
 			albums: []
 		};
 
 		this.AlbumService = new AlbumService();
 		this.service = new AuthService();
-		this.fetchUser();
 		this.getUserAlbums();
-		// this.filterAlbumUser();
 	}
-
-	componentWillReceiveProps(nextProps) {
-		this.setState({ ...this.state, loggedInUser: nextProps['userInSession'] });
-	}
-
-	fetchUser() {
-		this.service
-			.loggedin()
-			.then((response) => {
-				this.setState({
-					...this.state,
-					loggedInUser: response
-				});
-			})
-			.catch((err) => {
-				this.setState({
-					loggedInUser: false
-				});
-			});
-	}
-	// componentWillUnmount() {
-	// 	this.fetchUser();
-	// }
-	// getUser = (userObj) => {
-	// 	this.setState({
-	// 		loggedInUser: userObj
-	// 	});
-	// };
 
 	getUserAlbums = () => {
 		this.AlbumService
-			.getAlbums()
+			.getAlbums(this.state.loggedinUser._id)
 			.then((albums) => {
 				this.setState({ ...this.state, albums: albums });
 			})
