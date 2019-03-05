@@ -18,10 +18,12 @@ class SearchBar extends Component {
 		const newState = { ...this.state };
 		newState.checkToPrint = !newState.checkToPrint;
 		this.setState(newState);
+
 		this.props.filterAndCheck(newState.search, newState.checkToPrint);
 	};
 
 	render() {
+		console.log(this.state);
 		return (
 			<div className="search-bar">
 				<input

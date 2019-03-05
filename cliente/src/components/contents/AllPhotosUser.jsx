@@ -12,39 +12,20 @@ class AllPhotosUser extends Component {
 		super(props);
 		this.state = {
 			loggedinUser: this.props.userInSession,
-			title: '',
-			description: '',
-			photos: [],
-			data: '',
-			owner: ''
+			photos: []
 		};
 		this.AlbumService = new AlbumService();
 		this.service = new AuthService();
 		this.getPhotosUser();
 	}
 
-	// fetchUser() {
-	// 	if (this.state.loggedInUser === null) {
-	// 		//utilizamos el método loggedin para cualquier momento que deseemos obtener la información del usuario quede guardada en el state de app
-	// 		this.service
-	// 			.loggedin()
-	// 			.then((response) => {
-	// 				this.setState({
-	// 					...this.state,
-	// 					loggedInUser: response
-	// 				});
-	// 			})
-	// 			.catch((err) => {
-	// 				this.setState({
-	// 					loggedInUser: false
-	// 				});
-	// 			});
-	// 	}
-	// }
-
 	getPhotosUser() {
 		this.AlbumService.getAllPhotosUser(this.props.userInSession._id).then((allphotos) => {
-			console.log('recibiendo las fotos del usuario', allphotos);
+			allphotos.map((photo) => {
+				if (photo.content == null || photo.content == undefined) {
+					photo.content = '';
+				}
+			});
 			let newPhotos = allphotos;
 			this.setState({
 				...this.state,
@@ -53,7 +34,35 @@ class AllPhotosUser extends Component {
 		});
 	}
 
+	filterPhoto = (search, toPrint) => {
+		if ((search == '' || search == undefined || search == null) && toPrint == false) {
+			this.getPhotosUser();
+		}
+
+		const newState = { ...this.state };
+		console.log(newState);
+
+		newState.photos = newState.photos.filter((photo) => {
+			if (toPrint == false) {
+				return photo.content.indexOf(search) == 0;
+			} else {
+				return photo.toPrint === true && photo.content.indexOf(search) == 0;
+			}
+		});
+
+		// newState.photos = newState.photos.filter((photo) => {
+		// 	if (toPrint === false) {
+		// 		return photo.content.indexOf(search) === -1;
+		// 	} else {
+		// 		return photo.content.indexOf(search) === -1 && photo.toPrint === true;
+		// 	}
+		// });
+
+		this.setState(newState);
+	};
+
 	render() {
+		console.log(this.state.photos);
 		return (
 			<div>
 				<div className="all-photos-user">
@@ -82,7 +91,7 @@ class AllPhotosUser extends Component {
 						</Link>
 					</div>
 
-					<SearchBar />
+					<SearchBar filterAndCheck={this.filterPhoto} />
 				</div>
 			</div>
 		);
