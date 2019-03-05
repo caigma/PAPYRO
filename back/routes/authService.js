@@ -33,11 +33,11 @@ router.get('/currentuser', (req, res, next) => {
 	}
 });
 
-// router.put('/editprofile', (req, res, next) => {
-// 	User.findByIdAndUpdate("5c7900d78c22160d444fa0b0", {username: req.body.username}).then(user => {
-// 	  res.json({userUpdated: true, newUsername: req.body.username})
-// 	})
-//   })
+router.put('/editprofile', (req, res, next) => {
+	User.findByIdAndUpdate('5c7900d78c22160d444fa0b0', { username: req.body.username }).then((user) => {
+		res.json({ userUpdated: true, newUsername: req.body.username });
+	});
+});
 
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', (err, theUser, failureDetails) => {

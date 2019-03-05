@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import AlbumService from '../service/AlbumService';
 import { NavLink } from 'react-router-dom';
 import AuthService from '../service/AuthService';
-import axios from 'axios';
+// import axios from 'axios';
 
 class AlbumsList extends Component {
 	constructor(props) {

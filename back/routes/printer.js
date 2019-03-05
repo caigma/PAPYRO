@@ -6,7 +6,6 @@ const routerprinter = express.Router();
 
 routerprinter.get('/', (req, res, next) => {
 	User.find().then((users) => {
-		console.log(users);
 		res.json(users);
 	});
 });

@@ -13,6 +13,7 @@ export default class AlbumService {
 			.then((response) => response.data);
 	};
 
+	// CONSIGO LOS ALBUMES DE UN USUARIO
 	getAlbums = (user) => {
 		return this.service.post(`/album/List`, { user }).then((response) => response.data);
 	};
@@ -23,9 +24,35 @@ export default class AlbumService {
 			.then((response) => response.data);
 	};
 
+	// CONSIGO TODAS LAS FOTOS DE UN ALBUM
 	getPhotosAlbumId = (albumid) => {
 		return this.service.post('/album/listphotos', { albumid }).then((response) => response.data);
 	};
+
+	// CONSIGO TODAS LAS FOTOS DE UN USUARIO
+	getAllPhotosUser = (ownerid) => {
+		return this.service.post('/album/allphotosUser', { ownerid }).then((response) => response.data);
+	};
+
+	// CONSIGO UNA FOTO POR SU ID
+	getPhotoId = (photoid) => {
+		return this.service.post('/album/singlephoto', { photoid }).then((response) => {
+			return response.data;
+		});
+	};
+
+	udatePhoto = (newpublic, newtoprint, newcontent, photoid) => {
+		return this.service
+			.put('/album/singlephoto-update', { newpublic, newtoprint, newcontent, photoid })
+			.then((response) => {
+				return response.data;
+			});
+	};
+
+	// getPhotoId = (photoid) => {
+	// 	console.log('HOOOLA, ESTOY EN albumservice axios', photoid);
+	// 	return this.service.get(`/album/singlephoto/${photoid}`).then((response) => response.data);
+	// };
 
 	// getSingleAlbum = () => {
 	// 	return this.service.get(`/album/${params.id}`, { withCredentials: true }).then((response) => response.data);

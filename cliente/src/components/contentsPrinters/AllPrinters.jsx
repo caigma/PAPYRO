@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './AllPrinters.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import PrinterService from '../service/PrinterService';
 import { NavLink } from 'react-router-dom';
 import AuthService from '../service/AuthService';
+import Maps from './Maps';
 
 class AllPrinters extends Component {
 	constructor(props) {
@@ -79,6 +80,7 @@ class AllPrinters extends Component {
 						</NavLink>
 					</div>
 				))}
+				<Maps />
 			</div>
 		);
 	}

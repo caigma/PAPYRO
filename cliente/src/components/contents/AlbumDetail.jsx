@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import AlbumService from '../service/AlbumService';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 import './AlbumDetail.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddPhoto from './AddPhoto';
+import { NavLink } from 'react-router-dom';
 
 class AlbumDetail extends Component {
 	constructor(props) {
@@ -15,7 +16,9 @@ class AlbumDetail extends Component {
 			description: '',
 			photos: [],
 			data: '',
-			owner: ''
+			owner: '',
+			public: 'false',
+			toPrint: 'false'
 		};
 		this.AlbumService = new AlbumService();
 		this.getPhotos();
@@ -54,11 +57,21 @@ class AlbumDetail extends Component {
 	async componentDidMount() {
 		let data;
 
-		data = await axios.get(`http://localhost:5000/album/${this.getAlbumId()}`);
+		data = await axios.get(`http://localhost:5000/album/${this.props.match.params.id}`);
 		data = data.data;
 
 		this.setState({ data: data });
 	}
+
+	handleChange = (e) => {
+		console.log(e.target.value);
+		// const newState = { ...this.state, public: e.target.value };
+		// console.log(this.state.public);
+		// this.setState(newState);
+		// this.props.filterAndCheckStock(newState.search, newState.checkStock);
+	};
+
+	handleSubmit;
 
 	render() {
 		return (
@@ -69,24 +82,18 @@ class AlbumDetail extends Component {
 				</div>
 
 				<div className="all-photos-user">
-					{this.state.photos.map((photo) => (
-						<div className="imageAndText">
-							<div className="image-album">
-								<img src={photo.imageUrl} alt="alt" />
-							</div>
-							<div className="optionsImg">
-								<form className="form-optionsImg" onSubmit={this.handleSubmit}>
-									<select value={photo.public} onChange={this.handleChange}>
-										<option value="true">Private</option>
-										<option value="false">Public</option>
-									</select>
-									<select value={photo.toPrint} onChange={this.handleChange}>
-										<option value="true">To Print</option>
-										<option value="false">Not Print</option>
-									</select>
-									<input classNAme="submitOptionsImg" type="submit" value="Submit" />
-								</form>
-							</div>
+					{this.state.photos.map((photo, idx) => (
+						<div className="image-album">
+							<NavLink
+								style={{ textDecoration: 'none', color: 'black', margin: 0 }}
+								className="photo-detail"
+								to={`/photoDetail/${photo._id}`}
+								key={photo._id}
+							>
+								<div className="imageAndText">
+									<img src={photo.imageUrl} alt="alt" />
+								</div>
+							</NavLink>
 						</div>
 					))}
 				</div>

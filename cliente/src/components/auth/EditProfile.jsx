@@ -53,6 +53,30 @@ class EditProfile extends Component {
 						<label>Email</label>
 						<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
 
+						<label>Telephone</label>
+						<input id="telephone" type="text" name="telephone" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Street</label>
+						<input id="street" type="text" name="street" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Street number</label>
+						<input id="numStreet" type="text" name="numStreet" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Floor</label>
+						<input id="floor" type="text" name="floor" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Door</label>
+						<input id="door" type="text" name="door" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Postal Code</label>
+						<input id="postalCode" type="text" name="postalCode" onChange={(e) => this.handlerChange(e)} />
+
+						<label>City</label>
+						<input id="city" type="text" name="city" onChange={(e) => this.handlerChange(e)} />
+
+						<label>Country</label>
+						<input id="country" type="text" name="country" onChange={(e) => this.handlerChange(e)} />
+
 						<input type="submit" value="Update User" />
 					</form>
 				</div>

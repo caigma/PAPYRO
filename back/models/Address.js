@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 const addressSchema = new Schema(
 	{
+		coordinates: {},
 		street: String,
-		numStreet: Number,
-		floor: Number,
+		numStreet: String,
+		floor: String,
 		door: String,
-		postalCode: Number,
+		postalCode: String,
 		city: String,
 		country: String
 	},

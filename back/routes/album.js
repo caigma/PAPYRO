@@ -32,17 +32,47 @@ routeralbum.post('/photo/:albumid/:ownerid', uploadCloud.single('photo'), (req, 
 });
 // CONSIGO TODOS LOS USUARIOS DE MI BASE DE DATOS
 routeralbum.post('/List', (req, res, next) => {
-	console.log(req.body.user);
 	Album.find({ owner: req.body.user }).then((album) => {
 		res.json(album);
 	});
 });
-
+// CONSIGO TODOS LAS FOTOS DEL ALBUM SELECCIONADO
 routeralbum.post('/listphotos', (req, res, next) => {
 	Photo.find({ album: req.body.albumid }).then((photos) => {
 		res.json(photos);
 	});
 });
+
+// CONSIGO TODOS LAS FOTOS DEL USUARIO (para ponerlas en su home)
+routeralbum.post('/allphotosUser', (req, res, next) => {
+	Photo.find({ owner: req.body.ownerid }).then((photos) => {
+		res.json(photos);
+	});
+});
+
+// QUIERO CONSEGUIR LA FOTO SELECCIONADA
+routeralbum.post('/singlephoto', (req, res, next) => {
+	Photo.findById(req.body.photoid).then((photo) => {
+		res.json(photo);
+	});
+});
+// PUT UPDATE
+routeralbum.put('/singlephoto-update', (req, res, next) => {
+	Photo.findByIdAndUpdate(
+		{ _id: req.body.photoid },
+		{ public: req.body.newpublic, toPrint: req.body.newtoprint, content: req.body.newcontent },
+		{ new: true }
+	).then((photo) => {
+		res.json(photo);
+	});
+});
+
+// routeralbum.get('/siglephoto/', (req, res, next) => {
+// 	console.log('HOOOLA, ESTOY EN ROUTERALBUM');
+// 	Photo.find(req.body.photoid).then((photo) => {
+// 		res.json(photo.data);
+// 	});
+// });
 
 // return <Redirect to="/login" />
 

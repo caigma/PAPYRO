@@ -24,7 +24,7 @@ class NavbarPrinter extends Component {
 				<nav className="navbar">
 					<ul>
 						<li>
-							<a onClick={this.handleLogout}>Close Session</a>
+							<p> onClick={this.handleLogout}>Close Session</p>
 						</li>
 						<li>
 							<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/allorders">

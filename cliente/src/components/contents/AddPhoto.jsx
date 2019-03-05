@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import { Redirect } from 'react-router-dom';
 import './AddPhoto.css';
 import api from './api';
+import { Redirect } from 'react-router-dom';
 import AuthService from '../service/AuthService';
 
 class AddPhoto extends Component {
@@ -57,6 +58,8 @@ class AddPhoto extends Component {
 	render() {
 		if (this.state.loggedInUser === null) {
 			return <h1>LOADING DATA</h1>;
+		} else if (this.state.redirect) {
+			return <Redirect to="/albums-list/" />;
 		} else {
 			return (
 				<div className="Home">

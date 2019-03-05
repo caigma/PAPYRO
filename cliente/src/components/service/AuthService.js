@@ -24,6 +24,10 @@ class AuthService {
 		return this.service.get('/logout').then((response) => response.data);
 	};
 
+	editprofile = (username) => {
+		return this.service.put('/editprofile').then((response) => response.data);
+	};
+
 	// const params= this.props.match.params.id   PARA ID DEL USUARIO??
 }
 
