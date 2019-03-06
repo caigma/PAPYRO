@@ -62,12 +62,12 @@ class AllPhotosUser extends Component {
 
 		this.setState(newState);
 
-		// this.catchPhotosPrint = () => {
-		// 	this.state.photosToPrint = this.state.photos;
-		// 	const newState = { ...this.state, redirect: true };
-		// 	this.setState(newState);
-		// 	return this.props.photoPrint(newState.photosToPrint);
-		// };
+		this.catchPhotosPrint = () => {
+			const newState = { ...this.state, redirect: true };
+			this.props.photoPrint(this.state.photos);
+			this.setState(newState);
+			return;
+		};
 
 		// this.catchPhotosPrint();
 
@@ -106,8 +106,7 @@ class AllPhotosUser extends Component {
 							Send to Print
 						</Link> */}
 						<button onClick={this.catchPhotosPrint}>Send to Print</button>
-						{/* {this.state.redirect} ? <Redirect to="/printers" /> */}
-						{/* : <Redirect to="/albums-list" /> */}
+						{this.state.redirect ? <Redirect to="/printers" /> : ''}
 					</div>
 
 					<SearchBar filterAndCheck={this.filterPhoto} />

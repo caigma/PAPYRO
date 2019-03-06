@@ -9,7 +9,6 @@ export default class PrinterService {
 
 	getUsersAndPrinters = () => {
 		return this.service.get('/printer').then((response) => {
-			console.log(response);
 			return response.data;
 		});
 	};

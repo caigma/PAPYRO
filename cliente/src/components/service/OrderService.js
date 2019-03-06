@@ -7,9 +7,8 @@ export default class OrderService {
 		});
 	}
 
-	generateOrder = () => {
-		return this.service.get('/neworder').then((response) => {
-			console.log(response);
+	newOrder = (code, user, printerId, photosToPrint) => {
+		return this.service.post('/order/neworder', { code, user, printerId, photosToPrint }).then((response) => {
 			return response.data;
 		});
 	};

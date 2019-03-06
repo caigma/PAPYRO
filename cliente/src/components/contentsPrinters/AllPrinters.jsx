@@ -11,12 +11,12 @@ class AllPrinters extends Component {
 		super(props);
 		this.state = {
 			printers: [],
-			photosToPrint: this.props.newOrder
+			photosToPrint: this.props.photosfromfilter
 		};
 
 		this.PrinterService = new PrinterService();
 		this.service = new AuthService();
-		this.fetchUser();
+		// this.fetchUser();
 		this.getOnlyPrinters();
 		// this.filterAlbumUser();
 	}
@@ -24,6 +24,19 @@ class AllPrinters extends Component {
 	componentWillReceiveProps(nextProps) {
 		this.setState({ ...this.state, loggedInUser: nextProps['userInSession'] });
 	}
+
+	// componentWillMount = () => {
+	// 	console.log('WILLL');
+	// 	if (this.props.location) {
+	// 		this.setState({ ...this.state, photosToPrint: this.state.location }, () => {
+	// 			console.log(this.props);
+	// 		});
+	// 	}
+	// };
+	// componentDidMount() {
+	// 	const photos = this.props.location.state;
+	// 	console.log(photos);
+	// }
 
 	fetchUser() {
 		this.service
@@ -53,17 +66,18 @@ class AllPrinters extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	filterAlbumUser = () => {
-		const newState = { ...this.state };
-		newState.albums = this.state.albums.filter((album) => {
-			return album.owner === this.state.loggedInUser._id;
-		});
-		this.setState = newState;
-	};
+	// filterAlbumUser = () => {
+	// 	const newState = { ...this.state };
+	// 	newState.albums = this.state.albums.filter((album) => {
+	// 		return album.owner === this.state.loggedInUser._id;
+	// 	});
+	// 	this.setState = newState;
+	// };
 
 	render() {
-		console.log('estoy en printers', this.state.photosToPrint);
-		return (
+		console.log('en printers this.state.photosToPrint,', this.state.photosToPrint);
+		console.log('en printers this.state.loggedinuser,', this.state.loggedInUser);
+		return this.state.printers ? (
 			<div className="albums-list">
 				<h3>Choose your Printer</h3>
 				{this.state.printers.map((printer) => (
@@ -71,7 +85,7 @@ class AllPrinters extends Component {
 						<NavLink
 							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
 							className="item-2"
-							to={`/printers/${printer._id}`}
+							to={`/oneprinter/${printer._id}`}
 							key={printer._id}
 						>
 							<div className="eachAlbum">
@@ -84,6 +98,8 @@ class AllPrinters extends Component {
 				))}
 				<Maps />
 			</div>
+		) : (
+			<p>loading</p>
 		);
 	}
 }

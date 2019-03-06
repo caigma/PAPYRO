@@ -8,7 +8,7 @@ const orderSchema = new Schema(
 		printerId: { type: Schema.Types.ObjectId, ref: 'User' },
 		contactUser: String,
 		contactPrinter: Boolean,
-		photosToPrint: [ String ],
+		photosToPrint: [ {} ],
 		startDate: { type: Date, default: Date.now },
 		finishOrder: Date,
 		pending: Boolean,

@@ -16,6 +16,7 @@ import AllOrders from './components/contentsPrinters/AllOrders';
 import AlbumDetail from './components/contents/AlbumDetail';
 import AllPrinters from './components/contentsPrinters/AllPrinters';
 import PhotoDetail from './components/contents/PhotoDetail';
+import CreateOrder from './components/contentsPrinters/CreateOrder';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -66,7 +67,6 @@ class App extends Component {
 
 	render() {
 		this.fetchUser();
-		console.log('ESTOY EN APP', this.state.photosToPrint);
 
 		if (this.state.loggedInUser) {
 			if (this.state.loggedInUser.role === 'user') {
@@ -108,12 +108,25 @@ class App extends Component {
 							<Route exact path="/photoDetail/:id" component={PhotoDetail} />
 
 							<Route exact path="/add-album" component={AddAlbum} />
+							{/* <Route exact path="/printers" render={() => <AllPrinters />} /> */}
 							<Route
 								exact
 								path="/printers"
-								render={() => <AllPrinters newOrder={this.state.photosToPrint} />}
+								render={() => <AllPrinters photosfromfilter={this.state.photosToPrint} />}
+							/>
+							<Route
+								exact
+								path="/oneprinter/:id"
+								render={(props) => (
+									<CreateOrder
+										{...props}
+										photosToPrint={this.state.photosToPrint}
+										user={this.state.loggedInUser}
+									/>
+								)}
 							/>
 
+							{/* <Route exact path="/printers/:id" component={CreateOrder} /> */}
 							{/* <Route exact path="/printers" component={AllPrinters} /> */}
 						</Switch>
 					</div>

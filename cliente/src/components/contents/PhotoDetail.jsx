@@ -38,19 +38,16 @@ class PhotoDetail extends Component {
 	handleOptionChange = (event) => {
 		this.setState({ ...this.state, content: event.target.value });
 		// this.state.newcontent = event.target.value;
-		console.log('detailphoto', this.state.content);
 	};
 
 	handleOptionChangePublic = (event) => {
 		// this.state.newpublic = event.target.checked;
 		this.setState({ ...this.state, public: !this.state.public });
-		console.log('detailphoto', this.state.public);
 	};
 
 	handleOptionChangeToPrint = (event) => {
 		// this.state.newtoPrint = event.target.checked;
 		this.setState({ ...this.state, toPrint: !this.state.toPrint });
-		console.log('detailphoto', this.state.toPrint);
 	};
 
 	handlerSubmit = (event) => {

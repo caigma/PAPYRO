@@ -16,6 +16,8 @@ const cors = require('cors');
 const router = require('./routes/authService');
 const routeralbum = require('./routes/album');
 const routerprinter = require('./routes/printer');
+
+const routerorder = require('./routes/order');
 const passport = require('passport');
 
 mongoose
@@ -91,6 +93,7 @@ app.use('/', index);
 app.use('/auth', router);
 
 app.use('/album', routeralbum);
+app.use('/order', routerorder);
 
 app.use('/printer', routerprinter);
 
