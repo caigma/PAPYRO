@@ -10,7 +10,8 @@ class AllPrinters extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			printers: []
+			printers: [],
+			photosToPrint: this.props.newOrder
 		};
 
 		this.PrinterService = new PrinterService();
@@ -61,6 +62,7 @@ class AllPrinters extends Component {
 	};
 
 	render() {
+		console.log('estoy en printers', this.state.photosToPrint);
 		return (
 			<div className="albums-list">
 				<h3>Choose your Printer</h3>

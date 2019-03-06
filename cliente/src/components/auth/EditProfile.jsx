@@ -9,7 +9,20 @@ import AuthService from '../service/AuthService';
 class EditProfile extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { username: '', email: '' };
+		this.state = {
+			loggedInUser: this.props.userInSession,
+			username: '',
+			email: '',
+			NIF: '',
+			telephone: '',
+			street: '',
+			numStreet: '',
+			floor: '',
+			door: '',
+			postalCode: '',
+			city: '',
+			country: ''
+		};
 		this.service = new AuthService();
 	}
 
@@ -42,6 +55,7 @@ class EditProfile extends Component {
 	};
 
 	render() {
+		console.log('estoy en render edit profile', this.state.loggedInUser_id);
 		return (
 			<div className="container-signup">
 				<div className="allform">
@@ -52,6 +66,9 @@ class EditProfile extends Component {
 
 						<label>Email</label>
 						<input id="email" type="text" name="email" onChange={(e) => this.handlerChange(e)} />
+
+						<label>NIF/DNI</label>
+						<input id="NIF" type="text" name="NIF" onChange={(e) => this.handlerChange(e)} />
 
 						<label>Telephone</label>
 						<input id="telephone" type="text" name="telephone" onChange={(e) => this.handlerChange(e)} />

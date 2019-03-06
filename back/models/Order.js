@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema(
 	{
 		code: Number,
-		userId: String,
-		printerId: String,
+		userId: { type: Schema.Types.ObjectId, ref: 'User' },
+		printerId: { type: Schema.Types.ObjectId, ref: 'User' },
 		contactUser: String,
 		contactPrinter: Boolean,
+		photosToPrint: [ String ],
 		startDate: { type: Date, default: Date.now },
-		finishOrder: { type: Date, default: Date.now },
+		finishOrder: Date,
 		pending: Boolean,
 		finished: Boolean
 	},

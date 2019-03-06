@@ -41,9 +41,9 @@ export default class AlbumService {
 		});
 	};
 
-	udatePhoto = (newpublic, newtoprint, newcontent, photoid) => {
+	udatePhoto = (newpublic, newtoPrint, newcontent, photoid) => {
 		return this.service
-			.put('/album/singlephoto-update', { newpublic, newtoprint, newcontent, photoid })
+			.put('/album/singlephoto-update', { newpublic, newtoPrint, newcontent, photoid })
 			.then((response) => {
 				return response.data;
 			});

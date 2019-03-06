@@ -5,17 +5,22 @@ import { Link } from 'react-router-dom';
 import myimage from '../../image/IMG_5208.JPG';
 import AlbumService from '../service/AlbumService';
 import AuthService from '../service/AuthService';
+import OrderService from '../service/OrderService';
 import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class AllPhotosUser extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			loggedinUser: this.props.userInSession,
-			photos: []
+			photos: [],
+			photosToPrint: [],
+			redirect: false
 		};
 		this.AlbumService = new AlbumService();
 		this.service = new AuthService();
+		this.OrderService = new OrderService();
 		this.getPhotosUser();
 	}
 
@@ -35,34 +40,45 @@ class AllPhotosUser extends Component {
 	}
 
 	filterPhoto = (search, toPrint) => {
-		if ((search == '' || search == undefined || search == null) && toPrint == false) {
+		if ((search === '' || search === undefined || search == null) && toPrint === false) {
 			this.getPhotosUser();
 		}
 
 		const newState = { ...this.state };
-		console.log(newState);
 
 		newState.photos = newState.photos.filter((photo) => {
-			if (toPrint == false) {
-				return photo.content.indexOf(search) == 0;
+			if (toPrint === false) {
+				return photo.content.indexOf(search) === 0;
 			} else {
-				return photo.toPrint === true && photo.content.indexOf(search) == 0;
+				return photo.toPrint === true && photo.content.indexOf(search) === 0;
 			}
 		});
 
-		// newState.photos = newState.photos.filter((photo) => {
-		// 	if (toPrint === false) {
-		// 		return photo.content.indexOf(search) === -1;
-		// 	} else {
-		// 		return photo.content.indexOf(search) === -1 && photo.toPrint === true;
-		// 	}
+		// let onlyURLandID = [];
+		// let imagesToPrint = newState.photos;
+		// onlyURLandID = imagesToPrint.map((element) => {
+		// 	return { imageUrl: element.imageUrl, _id: element._id };
 		// });
 
 		this.setState(newState);
+
+		// this.catchPhotosPrint = () => {
+		// 	this.state.photosToPrint = this.state.photos;
+		// 	const newState = { ...this.state, redirect: true };
+		// 	this.setState(newState);
+		// 	return this.props.photoPrint(newState.photosToPrint);
+		// };
+
+		// this.catchPhotosPrint();
+
+		// 	newState.photosToPrint = newState.photos.map
+
+		// 	this.OrderService.generateOrder(newState.photosToPrint.imageUrl)
+
+		// }
 	};
 
 	render() {
-		console.log(this.state.photos);
 		return (
 			<div>
 				<div className="all-photos-user">
@@ -86,9 +102,12 @@ class AllPhotosUser extends Component {
 						<Link className="pruebaLink" style={{ textDecoration: 'none' }} to="albums-list">
 							My Albums
 						</Link>
-						<Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
+						{/* <Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
 							Send to Print
-						</Link>
+						</Link> */}
+						<button onClick={this.catchPhotosPrint}>Send to Print</button>
+						{/* {this.state.redirect} ? <Redirect to="/printers" /> */}
+						{/* : <Redirect to="/albums-list" /> */}
 					</div>
 
 					<SearchBar filterAndCheck={this.filterPhoto} />

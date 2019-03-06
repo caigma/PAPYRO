@@ -27,35 +27,39 @@ class PhotoDetail extends Component {
 			this.setState({
 				...this.state,
 				photo: photo,
-				newpublic: '',
-				newtoPrint: '',
-				newcontent: ''
+				public: '',
+				toPrint: '',
+				content: '',
+				photoSave: ''
 			});
 		});
 	}
 
 	handleOptionChange = (event) => {
-		this.state.newcontent = event.target.value;
+		this.setState({ ...this.state, content: event.target.value });
+		// this.state.newcontent = event.target.value;
+		console.log('detailphoto', this.state.content);
 	};
 
 	handleOptionChangePublic = (event) => {
-		this.state.newpublic = event.target.checked;
+		// this.state.newpublic = event.target.checked;
+		this.setState({ ...this.state, public: !this.state.public });
+		console.log('detailphoto', this.state.public);
 	};
 
 	handleOptionChangeToPrint = (event) => {
-		this.state.newtoPrint = event.target.checked;
+		// this.state.newtoPrint = event.target.checked;
+		this.setState({ ...this.state, toPrint: !this.state.toPrint });
+		console.log('detailphoto', this.state.toPrint);
 	};
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		if (this.state.newpublic === '') this.state.newpublic = this.state.photo.public;
-		if (this.state.newtoPrint === '') this.state.newtoPrint = this.state.photo.toPrint;
-		if (this.state.newcontent === '') this.state.newcontent = this.state.photo.content;
 
 		this.AlbumService
-			.udatePhoto(this.state.newpublic, this.state.newtoPrint, this.state.newcontent, this.state.photo._id)
+			.udatePhoto(this.state.public, this.state.toPrint, this.state.content, this.state.photo._id)
 			.then((response) => {
-				console.log('en el front, el objeto cambiado', response);
+				console.log(response);
 			});
 	};
 
@@ -118,7 +122,7 @@ class PhotoDetail extends Component {
 						<textarea
 							type="text"
 							name="content"
-							placeholde={this.state.photo.content}
+							placeholder={this.state.photo.content}
 							onChange={(e) => this.handleOptionChange(e)}
 						/>
 						<button type="submit">Save</button>

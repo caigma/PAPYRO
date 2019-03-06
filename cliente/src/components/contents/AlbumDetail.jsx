@@ -40,20 +40,6 @@ class AlbumDetail extends Component {
 		});
 	}
 
-	// ownershipCheck = (album) => {
-	// 	if (this.props.loggedInUser && album.owner == this.props.loggedInUser._id) {
-	// 		return (
-	// 			<div>
-	// 				<div>{this.renderEditForm()} </div>
-	// 				<button onClick={() => this.deleteProject(this.state._id)}>Delete project</button>
-	// 			</div>
-	// 		);
-	// 	}
-	// };
-
-	// this.props.match.params._id
-	// const id = this.props.match.params.id
-
 	async componentDidMount() {
 		let data;
 
@@ -62,16 +48,6 @@ class AlbumDetail extends Component {
 
 		this.setState({ data: data });
 	}
-
-	handleChange = (e) => {
-		console.log(e.target.value);
-		// const newState = { ...this.state, public: e.target.value };
-		// console.log(this.state.public);
-		// this.setState(newState);
-		// this.props.filterAndCheckStock(newState.search, newState.checkStock);
-	};
-
-	handleSubmit;
 
 	render() {
 		return (

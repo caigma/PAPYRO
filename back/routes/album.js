@@ -8,8 +8,6 @@ const Photo = require('../models/photo.js');
 
 // TRAEMOS LOS DATOS DE LA PHOTO PARA GUARDARLO EN BASE DE DATOS
 routeralbum.post('/photo/:albumid/:ownerid', uploadCloud.single('photo'), (req, res, next) => {
-	console.log(req.file);
-
 	const imgName = req.file.originalname;
 	const imageUrl = req.file.secure_url;
 	const album = req.params.albumid;
@@ -60,21 +58,12 @@ routeralbum.post('/singlephoto', (req, res, next) => {
 routeralbum.put('/singlephoto-update', (req, res, next) => {
 	Photo.findByIdAndUpdate(
 		{ _id: req.body.photoid },
-		{ public: req.body.newpublic, toPrint: req.body.newtoprint, content: req.body.newcontent },
+		{ public: req.body.newpublic, toPrint: req.body.newtoPrint, content: req.body.newcontent },
 		{ new: true }
 	).then((photo) => {
 		res.json(photo);
 	});
 });
-
-// routeralbum.get('/siglephoto/', (req, res, next) => {
-// 	console.log('HOOOLA, ESTOY EN ROUTERALBUM');
-// 	Photo.find(req.body.photoid).then((photo) => {
-// 		res.json(photo.data);
-// 	});
-// });
-
-// return <Redirect to="/login" />
 
 routeralbum.post('/', (req, res, next) => {
 	Album.create({

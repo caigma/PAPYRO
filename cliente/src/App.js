@@ -23,7 +23,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		//arrancamos el estado con un valor de loggedInUser con nada (luego lo vamos a reemplazar con el valor real)
-		this.state = { loggedInUser: null, user: false };
+		this.state = { loggedInUser: null, user: false, photosToPrint: [] };
 		this.service = new AuthService();
 	}
 
@@ -59,8 +59,14 @@ class App extends Component {
 		}
 	}
 
+	generateOrder = (photos) => {
+		const newState = { ...this.state, photosToPrint: photos };
+		this.setState(newState);
+	};
+
 	render() {
 		this.fetchUser();
+		console.log('ESTOY EN APP', this.state.photosToPrint);
 
 		if (this.state.loggedInUser) {
 			if (this.state.loggedInUser.role === 'user') {
@@ -76,10 +82,22 @@ class App extends Component {
 							<Route
 								exact
 								path="/allphotos"
-								render={() => <AllPhotosUser userInSession={this.state.loggedInUser} />}
+								render={() => (
+									<AllPhotosUser
+										photoPrint={this.generateOrder}
+										userInSession={this.state.loggedInUser}
+									/>
+								)}
 							/>
 
-							<Route exact path="/editprofile/:id" component={EditProfile} />
+							{/* <Route exact path="/editprofile/:id" component={EditProfile} /> */}
+
+							<Route
+								exact
+								path="/editprofile/"
+								render={() => <EditProfile userInSession={this.state.loggedInUser} />}
+							/>
+
 							{/* <Route exact path="/albums-list" component={AlbumsList} /> */}
 							<Route
 								exact
@@ -90,7 +108,13 @@ class App extends Component {
 							<Route exact path="/photoDetail/:id" component={PhotoDetail} />
 
 							<Route exact path="/add-album" component={AddAlbum} />
-							<Route exact path="/printers" component={AllPrinters} />
+							<Route
+								exact
+								path="/printers"
+								render={() => <AllPrinters newOrder={this.state.photosToPrint} />}
+							/>
+
+							{/* <Route exact path="/printers" component={AllPrinters} /> */}
 						</Switch>
 					</div>
 				);
