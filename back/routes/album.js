@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv');
-const Album = require('../models/album.js');
+const Album = require('../models/Album.js');
 const routeralbum = express.Router();
 const uploadCloud = require('../config/cloudinary');
 const Photo = require('../models/photo.js');
