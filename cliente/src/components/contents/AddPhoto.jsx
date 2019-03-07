@@ -59,7 +59,7 @@ class AddPhoto extends Component {
 		if (this.state.loggedInUser === null) {
 			return <h1>LOADING DATA</h1>;
 		} else if (this.state.redirect) {
-			return <Redirect to="/albums-list/" />;
+			return <Redirect to="/allphotos/" />;
 		} else {
 			return (
 				<div className="Home">
