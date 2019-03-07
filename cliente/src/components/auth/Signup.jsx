@@ -66,30 +66,30 @@ class Signup extends Component {
 
 		return (
 			<div className="container-signup">
-				<div className="allform">
-					<form className="signup" onSubmit={this.handlerSubmit}>
-						<div className="input-radio">
-							<div>
-								<label className="label-radio">Professional Printer</label>
-								<input
-									type="radio"
-									name="role"
-									value="printer"
-									required="required"
-									onChange={(e) => this.handlerChange(e)}
-								/>
-							</div>
-							<div>
-								<label className="label-radio">User</label>
-								<input
-									type="radio"
-									name="role"
-									value="user"
-									required="required"
-									onChange={(e) => this.handlerChange(e)}
-								/>
-							</div>
+				<form className="form-signup" onSubmit={this.handlerSubmit}>
+					<div className="input-radio">
+						<div className="inputs">
+							<label className="labeltexto">Professional Printer</label>
+							<input
+								type="radio"
+								name="role"
+								value="printer"
+								required="required"
+								onChange={(e) => this.handlerChange(e)}
+							/>
 						</div>
+						<div className="inputs">
+							<label className="labeltexto">User</label>
+							<input
+								type="radio"
+								name="role"
+								value="user"
+								required="required"
+								onChange={(e) => this.handlerChange(e)}
+							/>
+						</div>
+					</div>
+					<div className="inputs">
 						<label className="labeltexto">Username</label>
 						<input
 							id="username"
@@ -98,7 +98,8 @@ class Signup extends Component {
 							required="required"
 							onChange={(e) => this.handlerChange(e)}
 						/>
-
+					</div>
+					<div className="inputs">
 						<label className="labeltexto">Email</label>
 						<input
 							id="email"
@@ -107,7 +108,8 @@ class Signup extends Component {
 							required="required"
 							onChange={(e) => this.handlerChange(e)}
 						/>
-
+					</div>
+					<div className="inputs">
 						<label className="labeltexto">Password</label>
 						<input
 							type="password"
@@ -116,14 +118,23 @@ class Signup extends Component {
 							required="required"
 							onChange={(e) => this.handlerChange(e)}
 						/>
-
+					</div>
+					<div className="inputs">
 						<input type="submit" value="Create the Account" />
-					</form>
+					</div>
+				</form>
+
+				<div className="signupquestion">
+					<p>
+						Already have account?
+						<div className="container-links">
+							<Link className="links" to={'/login'}>
+								{' '}
+								Login
+							</Link>
+						</div>
+					</p>
 				</div>
-				<p>
-					Already have account?
-					<Link to={'/login'}> Login</Link>
-				</p>
 			</div>
 		);
 	}

@@ -14,19 +14,5 @@
 	height: 10px;
 }
 
-input[type=checkbox] + label {
-	color: gray;
-	font-style: italic;
-}
-input[type=checkbox]:checked + label {
-	color: rgb(74, 207, 103);
-	font-style: normal;
-}
-
-input::placeholder {
-	color: red;
-}
-
-input:placeholder {
-	color: gray;
+input[type="checkbox"]:checked {
 }

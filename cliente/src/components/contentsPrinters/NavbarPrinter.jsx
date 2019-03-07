@@ -22,41 +22,35 @@ class NavbarPrinter extends Component {
 		if (this.state.loggedInUser) {
 			return (
 				<nav className="navbar">
-					<ul>
-						<li>
-							<p> onClick={this.handleLogout}>Close Session</p>
-						</li>
-						<li>
-							<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/allorders">
-								Home
-							</Link>
-						</li>
-						<li>
-							<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/editprofile/:_id">
-								{this.state.loggedInUser.username}'s Profile
-							</Link>
-						</li>
-					</ul>
+					<div>
+						<div onClick={this.handleLogout}>Close Session</div>
+					</div>
+					<div>
+						<Link className="links" to="/editprofile/:_id">
+							{this.state.loggedInUser.username}'s Profile
+						</Link>
+					</div>
+					<div>
+						<Link className="links" to="/allorders">
+							Home
+						</Link>
+					</div>
 				</nav>
 			);
 		} else {
 			return (
-				<div>
-					<nav className="navbar">
-						<ul>
-							<li>
-								<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/signup">
-									Signup
-								</Link>
-							</li>
-							<li>
-								<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/login">
-									Login
-								</Link>
-							</li>
-						</ul>
-					</nav>
-				</div>
+				<nav className="navbar">
+					<div>
+						<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/signup">
+							Signup
+						</Link>
+					</div>
+					<div>
+						<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/login">
+							Login
+						</Link>
+					</div>
+				</nav>
 			);
 		}
 	}

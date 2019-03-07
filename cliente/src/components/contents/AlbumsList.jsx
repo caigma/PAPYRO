@@ -47,12 +47,14 @@ class AlbumsList extends Component {
 							to={`/albums-list/${album._id}`}
 							key={album._id}
 						>
-							<div className="eachAlbum">
-								<div className="title">{album.title}</div>
-								<div className="description">{album.description}</div>
-								<div>
-									<p>Created at: {album.created_at}</p>
-								</div>
+							<div className="title">
+								<h2>Title: {album.title}</h2>
+							</div>
+							<div className="description">
+								<h3>Tags: {album.description}</h3>
+							</div>
+							<div>
+								<p>Created at: {album.created_at}</p>
 							</div>
 						</NavLink>
 					</div>

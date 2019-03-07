@@ -25,48 +25,42 @@ class Navbar extends Component {
 		if (this.state.loggedInUser) {
 			return (
 				<nav className="navbar">
-					<ul>
-						<li>
-							<p onClick={this.handleLogout}>Close Session</p>
-						</li>
+					<div>
+						<div onClick={this.handleLogout}>Close Session</div>
+					</div>
 
-						<li>
-							<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/editprofile/:_id">
-								{this.state.loggedInUser.username}'s Profile
-							</Link>
-						</li>
-						<li>
-							<Link to="/albums-list" style={{ textDecoration: 'none' }}>
-								MYALBUMS
-							</Link>
-						</li>
+					<div>
+						<Link className="links" to="/editprofile/:_id">
+							{this.state.loggedInUser.username}'s Profile
+						</Link>
+					</div>
 
-						<li>
-							<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/allphotos">
-								Home
-							</Link>
-						</li>
-					</ul>
+					<div>
+						<Link className="links" to="/albums-list">
+							My Albums
+						</Link>
+					</div>
+					<div>
+						<Link className="links" to="/allphotos">
+							Home
+						</Link>
+					</div>
 				</nav>
 			);
 		} else {
 			return (
-				<div>
-					<nav className="navbar">
-						<ul>
-							<li>
-								<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/signup">
-									Signup
-								</Link>
-							</li>
-							<li>
-								<Link style={{ textDecoration: 'none', color: 'black', margin: 0 }} to="/login">
-									Login
-								</Link>
-							</li>
-						</ul>
-					</nav>
-				</div>
+				<nav className="navbar">
+					<div>
+						<Link className="links" to="/login">
+							Login
+						</Link>
+					</div>
+					<div>
+						<Link className="links" to="/signup">
+							Signup
+						</Link>
+					</div>
+				</nav>
 			);
 		}
 	}

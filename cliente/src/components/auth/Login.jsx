@@ -51,33 +51,47 @@ class Login extends Component {
 			return <Redirect to="/allorders" />;
 		}
 		return (
-			<div className="container-login">
-				<form className="signup" onSubmit={this.handlerSubmit}>
-					<label>Email</label>
-					<input
-						id="email"
-						type="text"
-						name="email"
-						required="required"
-						onChange={(e) => this.handlerChange(e)}
-					/>
+			<div className="container-signup">
+				<form className="form-signup" onSubmit={this.handlerSubmit}>
+					<div>
+						<div className="inputs">
+							<label className="labeltexto">Email</label>
+							<input
+								id="email"
+								type="text"
+								name="email"
+								required="required"
+								onChange={(e) => this.handlerChange(e)}
+							/>
+						</div>
 
-					<label>Password</label>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						required="required"
-						onChange={(e) => this.handlerChange(e)}
-					/>
-
-					<input type="submit" value="Log in" />
+						<div className="inputs">
+							<label className="labeltexto">Password</label>
+							<input
+								type="password"
+								id="password"
+								name="password"
+								required="required"
+								onChange={(e) => this.handlerChange(e)}
+							/>
+						</div>
+					</div>
+					<div className="inputs">
+						<input type="submit" value="Log in" />
+					</div>
 				</form>
-				<h1>{this.state.error ? 'Error' : ''}</h1>
-				<p>
-					Don't have account?
-					<Link to={'/signup'}> Signup</Link>
-				</p>
+				<div className="signupquestion">
+					<h1>{this.state.error ? 'Error' : ''}</h1>
+					<p>
+						Don't have account?
+						<div className="container-links">
+							<Link className="links" to={'/signup'}>
+								{' '}
+								Signup
+							</Link>
+						</div>
+					</p>
+				</div>
 			</div>
 		);
 	}

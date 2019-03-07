@@ -71,7 +71,7 @@ class App extends Component {
 		if (this.state.loggedInUser) {
 			if (this.state.loggedInUser.role === 'user') {
 				return (
-					<div className="padre">
+					<div className="grandfather">
 						<header className="container-navbar">
 							<Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
 						</header>
@@ -133,8 +133,8 @@ class App extends Component {
 				);
 			} else if (this.state.loggedInUser.role === 'printer') {
 				return (
-					<div className="padre">
-						<header className="header">
+					<div className="grandfather">
+						<header>
 							<NavbarPrinter userInSession={this.state.loggedInUser} logout={this.logout} />
 						</header>
 
@@ -148,7 +148,7 @@ class App extends Component {
 		} else {
 			//si no estás logeado, mostrar opcionalmente o login o signup
 			return (
-				<div className="padre">
+				<div className="grandfather">
 					<header className="container-navbar">
 						<Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
 

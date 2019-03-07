@@ -81,32 +81,35 @@ class AllPhotosUser extends Component {
 	render() {
 		return (
 			<div>
-				<div className="all-photos-user">
+				<div className="container-album">
 					{this.state.photos.map((photo, idx) => (
-						<div className="image-album">
-							<NavLink
-								style={{ textDecoration: 'none', color: 'black', margin: 0 }}
-								className="photo-detail"
-								to={`/photoDetail/${photo._id}`}
-								key={photo._id}
-							>
-								<div className="imageAndText">
-									<img src={photo.imageUrl} alt="alt" />
-								</div>
-							</NavLink>
+						<div className="container-image">
+							<Link to={`/photoDetail/${photo._id}`} key={photo._id}>
+								<img src={photo.imageUrl} alt="alt" className="image" />
+							</Link>
 						</div>
 					))}
 				</div>
-				<div className="fixed-search">
+
+				<div className="bottom-album">
 					<div className="two-buttons">
-						<Link className="pruebaLink" style={{ textDecoration: 'none' }} to="albums-list">
-							My Albums
-						</Link>
-						{/* <Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
+						<div className="myalbumslink">
+							<button className="button-send">
+								<Link className="links" to="albums-list">
+									My Albums
+								</Link>
+							</button>
+
+							{/* <Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
 							Send to Print
 						</Link> */}
-						<button onClick={this.catchPhotosPrint}>Send to Print</button>
-						{this.state.redirect ? <Redirect to="/printers" /> : ''}
+						</div>
+						<div className="myalbumslink">
+							<button className="button-send" onClick={this.catchPhotosPrint}>
+								Send to Print
+							</button>
+							{this.state.redirect ? <Redirect to="/printers" /> : ''}
+						</div>
 					</div>
 
 					<SearchBar filterAndCheck={this.filterPhoto} />

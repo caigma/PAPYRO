@@ -24,14 +24,11 @@ class SearchBar extends Component {
 
 	render() {
 		return (
-			<div className="search-bar">
-				<input
-					placeholder="Search hashtag"
-					className="input-search"
-					type="text"
-					onChange={(e) => this.filter(e)}
-				/>
-				<div className="check">
+			<div className="searchbar-and-checkbox">
+				<div className="searchbar">
+					<input placeholder="Search Tags" type="text" onChange={(e) => this.filter(e)} />
+				</div>
+				<div className="checkbox">
 					<input id="check" type="checkbox" onClick={this.clickHandler} />
 					<label for="check">Photos to Print</label>
 				</div>
