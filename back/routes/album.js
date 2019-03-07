@@ -3,7 +3,7 @@ require('dotenv');
 const Album = require('../models/Album.js');
 const routeralbum = express.Router();
 const uploadCloud = require('../config/cloudinary');
-const Photo = require('../models/photo.js');
+const Photo = require('../models/Photo.js');
 // import { Redirect } from 'react-router-dom';
 
 // TRAEMOS LOS DATOS DE LA PHOTO PARA GUARDARLO EN BASE DE DATOS
