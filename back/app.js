@@ -21,7 +21,7 @@ const routerorder = require('./routes/order');
 const passport = require('passport');
 
 mongoose
-	.connect(process.env.DBURL, { useNewUrlParser: true })
+	.connect(process.env.DBURLL, { useNewUrlParser: true })
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 	})

@@ -17,6 +17,7 @@ import AlbumDetail from './components/contents/AlbumDetail';
 import AllPrinters from './components/contentsPrinters/AllPrinters';
 import PhotoDetail from './components/contents/PhotoDetail';
 import CreateOrder from './components/contentsPrinters/CreateOrder';
+import Home from './components/contents/Home';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -146,7 +147,6 @@ class App extends Component {
 				);
 			}
 		} else {
-			//si no estás logeado, mostrar opcionalmente o login o signup
 			return (
 				<div className="grandfather">
 					<header className="container-navbar">
@@ -157,10 +157,14 @@ class App extends Component {
 							<Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
 						</Switch>
 					</header>
+
+					<Home />
 				</div>
 			);
 		}
 	}
 }
+
+/* {this.state.redirect ? <Redirect to="/albums-list" /> : ''} */
 
 export default App;

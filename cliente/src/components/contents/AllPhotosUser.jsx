@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './AllPhotosUser.css';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import myimage from '../../image/IMG_5208.JPG';
+
 import AlbumService from '../service/AlbumService';
 import AuthService from '../service/AuthService';
 import OrderService from '../service/OrderService';
@@ -95,7 +95,7 @@ class AllPhotosUser extends Component {
 					<div className="two-buttons">
 						<div className="myalbumslink">
 							<button className="button-send">
-								<Link className="links" to="albums-list">
+								<Link className="links" to="/albums-list">
 									My Albums
 								</Link>
 							</button>

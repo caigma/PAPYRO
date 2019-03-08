@@ -10,7 +10,8 @@ class AddAlbum extends Component {
 			title: '',
 			description: '',
 			photos: [],
-			owner: ''
+			owner: '',
+			redirect: false
 		};
 		this.AlbumService = new AlbumService();
 	}
@@ -40,33 +41,37 @@ class AddAlbum extends Component {
 			this.setState({
 				...this.state,
 				title: '',
-				description: ''
+				description: '',
+				redirect: true
 			});
 		});
 	};
 
 	render() {
-		return (
-			<div className="container-addAlbum">
-				<form className="form-addAlbum" onSubmit={this.handlerSubmit}>
-					<input
-						type="text"
-						placeholder="Album's Title"
-						name="title"
-						onChange={(e) => this.handlerChange(e)}
-					/>
-					<input
-						type="text"
-						placeholder="Description"
-						name="description"
-						onChange={(e) => this.handlerChange(e)}
-					/>
+		if (this.state.redirect) {
+			return <Redirect to="/albums-list" />;
+		} else {
+			return (
+				<div className="container-addAlbum">
+					<form className="form-addAlbum" onSubmit={this.handlerSubmit}>
+						<input
+							type="text"
+							placeholder="Album's Title"
+							name="title"
+							onChange={(e) => this.handlerChange(e)}
+						/>
+						<input
+							type="text"
+							placeholder="Description"
+							name="description"
+							onChange={(e) => this.handlerChange(e)}
+						/>
 
-					<input type="submit" value="Add Album" />
-					{this.state.redirect ? <Redirect to="/albums-list" /> : ''}
-				</form>
-			</div>
-		);
+						<input type="submit" value="Add Album" />
+					</form>
+				</div>
+			);
+		}
 	}
 }
 

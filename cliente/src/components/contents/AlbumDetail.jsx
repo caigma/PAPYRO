@@ -52,9 +52,9 @@ class AlbumDetail extends Component {
 	render() {
 		return (
 			<div className="container-album-detail">
-				<div>
+				<div className="titleanddescription">
 					<h1>{this.state.data.title}</h1>
-					<p>{this.state.data.description}</p>
+					<p>Tags: {this.state.data.description}</p>
 				</div>
 
 				<div className="all-photos-user">

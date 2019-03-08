@@ -1,29 +1,39 @@
-/* *,
-body,
-html,
-.granfather {
-	margin: 0;
-	padding: 0;
+/* @import '/path/to/reset-css/reset.css'; */
+
+html {
+	height: 2000px;
+}
+
+.home-user {
+	width: 100%;
+}
+
+/* .imagehome {
+	width: 500px;
+	height: 300px;
+	object-fit: cover;
 } */
 
-.grandfather {
-	padding: 60px 0px 160px 0px;
-}
 .container-navbar {
 	position: fixed;
 	z-index: 1;
 	top: 0;
+	background-color: whitesmoke;
 	width: 100%;
-	background-color: rgba(245, 245, 245, 0.52);
+	margin: auto;
 }
+
 nav {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	font-size: 15px;
 	width: 100%;
 	color: whitesmoke;
+	padding: 10px;
 }
-
+.logo {
+	height: 20px;
+}
 nav > div {
 	padding: 4px 6px;
 	background-color: rgb(41, 35, 29);
@@ -88,15 +98,10 @@ input [type=submit] {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+	margin-top: 80px;
 }
 
 .container-image {
-	/*height: 200px;
-	min-width: 120px;
-	display: block;
-	position: relative;
-	overflow: hidden;
-    margin-top: 10px; */
 	padding: 4px;
 }
 
@@ -116,6 +121,27 @@ input [type=submit] {
 	}
 	.searchbar {
 		width: 40%;
+	}
+
+	.each-album h2 {
+		font-size: 18px;
+	}
+
+	.each-album h3 {
+		font-size: 14px;
+	}
+
+	.each-album p {
+		font-size: 12px;
+	}
+	.navbar {
+		font-size: 10px;
+	}
+}
+
+@media (max-width: 400px) {
+	.navbar {
+		display: none;
 	}
 }
 
@@ -174,13 +200,37 @@ input[type=checkbox] + label {
 }
 
 .albums-list {
-	background-color: black;
 	padding-top: 90px;
 }
 
 .each-album {
 	background: white;
 	width: 80%;
-	margin: auto;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
 	padding: 5px;
+	margin: 15px auto;
+	color: black;
+}
+
+.linkaddphoto {
+	color: whitesmoke;
+	padding: 6px;
+}
+
+.fixedbutton {
+	position: fixed;
+	bottom: 10vh;
+	left: 40vw;
+	z-index: 4;
+	background-color: black;
+	padding: 5px;
+	border: solid whitesmoke;
+}
+
+/* ALBUM DETAIL */
+.titleanddescription {
+	border: solid yellow;
+	margin: 100px;
+	padding: 20px;
 }
