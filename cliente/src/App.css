@@ -1,8 +1,8 @@
 /* @import '/path/to/reset-css/reset.css'; */
-
+/* 
 html {
 	height: 2000px;
-}
+} */
 
 .home-user {
 	width: 100%;
@@ -592,4 +592,40 @@ input[type=checkbox] + label {
 .formchangephoto {
 	margin: auto;
 	padding: 40px;
+}
+
+.checkedcontainer {
+	display: flex;
+	flex-direction: row;
+	background-color: black;
+	padding-top: 10px;
+	color: whitesmoke;
+}
+
+.button-textarea textarea {
+	border: whitesmoke 2px solid;
+	margin: 4px 0px;
+}
+
+.savephoto {
+	color: whitesmoke;
+	background-color: black;
+	margin: 20px;
+	height: 40px;
+}
+
+.button-textarea {
+	display: flex;
+	flex-direction: row;
+}
+.containercheckbox input {
+	margin: 0 30px;
+}
+
+.blockcheckedcontainer {
+	margin-left: 20px;
+}
+
+.printer-list h3 {
+	margin-left: 40px;
 }

@@ -78,9 +78,9 @@ class AllPrinters extends Component {
 		console.log('en printers this.state.photosToPrint,', this.state.photosToPrint);
 		console.log('en printers this.state.loggedinuser,', this.state.loggedInUser);
 		return this.state.printers ? (
-			<div className="albums-list">
+			<div className="printer-list">
 				<h3>Choose your Printer</h3>
-				{this.state.printers.map((printer) => (
+				{this.state.printers.map((printer, idx) => (
 					<div className="each-album">
 						<NavLink
 							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
@@ -89,7 +89,11 @@ class AllPrinters extends Component {
 							key={printer._id}
 						>
 							<div className="eachAlbum">
-								<div className="title">{printer.username}</div>
+								<div className="title">
+									<ul>
+										{idx + 1}. Printer Name: {printer.username}
+									</ul>
+								</div>
 								<div className="description">{printer.email}</div>
 								<div />
 							</div>

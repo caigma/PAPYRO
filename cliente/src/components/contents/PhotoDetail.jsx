@@ -34,8 +34,6 @@ class PhotoDetail extends Component {
 				photoSave: ''
 			});
 		});
-		console.log('public, antes de submit', this.state.photo.public);
-		console.log('toPrint, antes de submit', this.state.photo.toPrint);
 	}
 
 	handleOptionChange = (event) => {
@@ -63,9 +61,8 @@ class PhotoDetail extends Component {
 			this.state.toPrint = this.state.photo.toPrint;
 		}
 		if (this.state.content === '') {
-			this.state.public = this.state.photo.content;
+			this.state.content = this.state.photo.content;
 		}
-		console.log(this.state.public, this.state.toPrint, this.state.content);
 
 		this.AlbumService
 			.udatePhoto(this.state.public, this.state.toPrint, this.state.content, this.state.photo._id)
@@ -81,9 +78,6 @@ class PhotoDetail extends Component {
 	};
 
 	render() {
-		console.log('content', this.state.content);
-		console.log('public', this.state.public);
-		console.log('toPrint', this.state.toPrint);
 		if (this.state.redirect) {
 			return <Redirect to="/allphotos" />;
 		}
@@ -95,7 +89,7 @@ class PhotoDetail extends Component {
 				<form className="formchangephoto" onSubmit={this.handlerSubmit}>
 					<div className="checkedcontainer">
 						<div className="blockcheckedcontainer">
-							<label class="container">
+							<label class="containercheckbox">
 								Public
 								<input
 									type="checkbox"
@@ -105,20 +99,9 @@ class PhotoDetail extends Component {
 								/>
 								<span class="checkmark" />
 							</label>
-							{/* <label class="container">
-								Private
-								<input
-									type="radio"
-									checked="checked"
-									value="true"
-									name="public"
-									onChange={(e) => this.handleOptionChange(e)}
-								/>
-								<span class="checkmark" />
-							</label> */}
 						</div>
 						<div className="blockcheckedcontainer">
-							<label class="container">
+							<label class="containercheckbox">
 								To Print
 								<input
 									type="checkbox"
@@ -128,17 +111,6 @@ class PhotoDetail extends Component {
 								/>
 								<span class="checkmark" />
 							</label>
-							{/* <label class="container">
-								Not Print
-								<input
-									type="radio"
-									checked="checked"
-									value="false"
-									name="toPrint"
-									onChange={(e) => this.handleOptionChange(e)}
-								/>
-								<span class="checkmark" />
-							</label> */}
 						</div>
 					</div>
 					<div className="button-textarea">
@@ -148,7 +120,9 @@ class PhotoDetail extends Component {
 							placeholder={this.state.photo.content}
 							onChange={(e) => this.handleOptionChange(e)}
 						/>
-						<button type="submit">Save</button>
+						<button className="savephoto" type="submit">
+							Save
+						</button>
 					</div>
 				</form>
 			</div>
