@@ -13,7 +13,9 @@ class createOrder extends Component {
 			photosToPrint: this.props.photosToPrint,
 			userId: this.props.user,
 			printerId: this.props.match.params.id,
-			code: new Date().getFullYear().toString() + '1'
+			code: new Date().getFullYear().toString() + '1',
+			redirect: false,
+			mensaje: 'Orden enviada'
 		};
 		this.OrderService = new OrderService();
 		// this.newOrder();
@@ -40,43 +42,64 @@ class createOrder extends Component {
 			.then((response) => {
 				this.setState({
 					...this.state,
-					code: '',
 					userId: '',
 					printerId: '',
-					photosToPrint: []
+					photosToPrint: [],
+					redirect: true
 					// startDate: ''
 				});
 			});
 	};
 
 	render() {
-		console.log('usuario', this.props.user.username);
-		console.log('code', this.state.code);
-		// console.log('startDate', this.state.startDate);
-		console.log('printerId', this.props.match.params.id);
-		console.log('photosToPrint', this.props.photosToPrint);
-
-		return (
-			<div>
-				<div className="each-album">
-					<div className="eachAlbum">
-						<h2> Solicitud de Pedido </h2>
-						<div className="description">Order Number: {this.state.code}</div>
-						<div className="title">User: {this.props.user.username}</div>
-						<div className="all-photos-user">
-							{this.state.photosToPrint.map((photo, idx) => (
-								<div className="image-album">
-									<div className="imageAndText">
-										<img src={photo.imageUrl} alt="alt" />
-									</div>
-								</div>
-							))}
-						</div>
-						<button onClick={this.newOrder}>Send Order</button>
+		if (this.state.redirect == true) {
+			return (
+				<div className="pedidorealizo">
+					<h2>Pedido Realizado</h2>
+					<h3>Order Number: {this.state.code}</h3>
+					<h3>User: {this.props.user.username}</h3>
+					<h3>Printer: {this.props.match.params.id}</h3>
+					<div className="container-album">
+						{this.props.photosToPrint.map((photo, idx) => (
+							<div className="container-image">
+								<img src={photo.imageUrl} alt="alt" className="image" />
+							</div>
+						))}
 					</div>
 				</div>
-			</div>
-		);
+			);
+		} else {
+			return (
+				<div>
+					<div className="each-album">
+						<div className="eachAlbum">
+							<div className="ordercursada">
+								<h2> Solicitud de Pedido </h2>
+							</div>
+							<div className="numberorder">
+								<h3> Order Number: {this.state.code} </h3>
+							</div>
+							<div className="userorder">
+								<h3> User: {this.props.user.username} </h3>
+							</div>
+
+							<div className="container-album">
+								{this.state.photosToPrint.map((photo, idx) => (
+									<div className="container-image">
+										<img src={photo.imageUrl} alt="alt" className="image" />
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+					<div className="blockfixed">
+						<button className="sendpedido" onClick={this.newOrder}>
+							Send Order
+						</button>
+					</div>
+				</div>
+			);
+		}
 	}
 }
 

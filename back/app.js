@@ -16,12 +16,11 @@ const cors = require('cors');
 const router = require('./routes/authService');
 const routeralbum = require('./routes/album');
 const routerprinter = require('./routes/printer');
-
 const routerorder = require('./routes/order');
 const passport = require('passport');
 
 mongoose
-	.connect(process.env.DBURLL, { useNewUrlParser: true })
+	.connect(process.env.DBURL, { useNewUrlParser: true })
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 	})

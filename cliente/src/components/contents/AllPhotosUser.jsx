@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './AllPhotosUser.css';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-
+import myimage from '../../image/IMG_5208.JPG';
 import AlbumService from '../service/AlbumService';
 import AuthService from '../service/AuthService';
 import OrderService from '../service/OrderService';
@@ -92,24 +92,25 @@ class AllPhotosUser extends Component {
 				</div>
 
 				<div className="bottom-album">
-					<div className="two-buttons">
-						<div className="myalbumslink">
+					<div className="two-buttons2">
+						<div>
 							<button className="button-send">
-								<Link className="links" to="/albums-list">
+								<Link className="links" to="albums-list">
 									My Albums
 								</Link>
 							</button>
-
-							{/* <Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
-							Send to Print
-						</Link> */}
 						</div>
+
 						<div className="myalbumslink">
 							<button className="button-send" onClick={this.catchPhotosPrint}>
 								Send to Print
 							</button>
 							{this.state.redirect ? <Redirect to="/printers" /> : ''}
 						</div>
+
+						{/* <Link className="pruebaLink" style={{ textDecoration: 'none' }} to="printers">
+							Send to Print
+						</Link> */}
 					</div>
 
 					<SearchBar filterAndCheck={this.filterPhoto} />

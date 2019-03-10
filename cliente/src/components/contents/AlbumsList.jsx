@@ -59,11 +59,8 @@ class AlbumsList extends Component {
 						</NavLink>
 					</div>
 				))}
-				<div className="fixedbutton">
-					<Link className="linkaddphoto" to="add-album">
-						Add Album
-					</Link>
-				</div>
+
+				<Link to="add-album">Add Album</Link>
 			</div>
 		);
 	}

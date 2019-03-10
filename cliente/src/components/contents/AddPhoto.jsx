@@ -62,10 +62,14 @@ class AddPhoto extends Component {
 			return <Redirect to="/allphotos/" />;
 		} else {
 			return (
-				<div className="Home">
+				<div className="addphoto">
 					<form onSubmit={(e) => this.handleSubmit(e)}>
-						<input className="inputfile" type="file" onChange={(e) => this.handleChange(e)} /> <br />
-						<button type="submit">New Photo</button>
+						<div className="upload-btn-wrapper">
+							<input className="savephoto" type="file" onChange={(e) => this.handleChange(e)} /> <br />
+							<button className="sendfile" type="submit">
+								Save Photo
+							</button>
+						</div>
 					</form>
 
 					{this.state.photos.map((photo) => <img key={photo.url} src={photo.url} alt="" />)}
@@ -74,4 +78,5 @@ class AddPhoto extends Component {
 		}
 	}
 }
+
 export default AddPhoto;

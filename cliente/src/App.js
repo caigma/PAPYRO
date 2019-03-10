@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import AuthService from './components/service/AuthService';
-// import Home from './components/contents/Home';
+import Home from './components/contents/Home';
 import Navbar from './components/contents/Navbar';
 import NavbarPrinter from './components/contentsPrinters/NavbarPrinter';
 import AllPhotosUser from './components/contents/AllPhotosUser';
@@ -17,7 +17,6 @@ import AlbumDetail from './components/contents/AlbumDetail';
 import AllPrinters from './components/contentsPrinters/AllPrinters';
 import PhotoDetail from './components/contents/PhotoDetail';
 import CreateOrder from './components/contentsPrinters/CreateOrder';
-import Home from './components/contents/Home';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -147,6 +146,7 @@ class App extends Component {
 				);
 			}
 		} else {
+			//si no estás logeado, mostrar opcionalmente o login o signup
 			return (
 				<div className="grandfather">
 					<header className="container-navbar">
@@ -157,14 +157,11 @@ class App extends Component {
 							<Route exact path="/login" render={() => <Login getUser={this.getUser} />} />
 						</Switch>
 					</header>
-
 					<Home />
 				</div>
 			);
 		}
 	}
 }
-
-/* {this.state.redirect ? <Redirect to="/albums-list" /> : ''} */
 
 export default App;

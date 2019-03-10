@@ -1,1 +1,35 @@
+.home-user {
+	display: flex;
+	justify-content: center;
+	background-image: url("./fondohome.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 800px;
+	width: 100%;
+	margin-top: -5px;
+}
 
+.bodyphoto {
+	margin-top: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.bodyphoto h1 {
+	font-size: 50px;
+}
+
+.bodyphoto p {
+	font-size: 20px;
+}
+
+.logotexto {
+	background-color: rgba(245, 245, 245, 0.2);
+	padding: 10px 30px 10px 30px;
+}
+
+.linkshome {
+	text-decoration: none;
+	color: black;
+}

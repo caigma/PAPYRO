@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../service/AuthService';
 import './NavbarPrinter.css';
-import myimage from '../../image/logos/LOGO CON PRINT.png';
 
 class NavbarPrinter extends Component {
 	constructor(props) {
@@ -24,16 +23,13 @@ class NavbarPrinter extends Component {
 			return (
 				<nav className="navbar">
 					<div>
-						<img className="logo" src={myimage} alt="papyro" />
-					</div>
-					<div>
 						<div onClick={this.handleLogout}>Close Session</div>
 					</div>
-					{/* <div>
+					<div>
 						<Link className="links" to="/editprofile/:_id">
 							{this.state.loggedInUser.username}'s Profile
 						</Link>
-					</div> */}
+					</div>
 					<div>
 						<Link className="links" to="/allorders">
 							Home

@@ -13,3 +13,6 @@
 .input-search {
 	height: 10px;
 }
+
+input[type="checkbox"]:checked {
+}

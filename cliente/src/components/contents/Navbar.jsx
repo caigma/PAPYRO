@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthService from '../service/AuthService';
 import './Navbar.css';
-import myimage from '../../image/logos/LOGO CON PRINT.png';
+import logonavbar from '../../image/papiroImagen.png';
 
 class Navbar extends Component {
 	constructor(props) {
@@ -27,13 +27,14 @@ class Navbar extends Component {
 			return (
 				<nav className="navbar">
 					<div>
-						<img className="logo" src={myimage} alt="papyro" />
+						<div onClick={this.handleLogout}>Close Session</div>
 					</div>
-					{/* <div>
+
+					<div>
 						<Link className="links" to="/editprofile/:_id">
 							{this.state.loggedInUser.username}'s Profile
 						</Link>
-					</div> */}
+					</div>
 
 					<div>
 						<Link className="links" to="/albums-list">
@@ -45,20 +46,13 @@ class Navbar extends Component {
 							Home
 						</Link>
 					</div>
-
-					<div>
-						<Link className="links" to="/allphotos">
-							<div onClick={this.handleLogout}>Close Session</div>
-						</Link>
-					</div>
 				</nav>
 			);
 		} else {
 			return (
 				<nav className="navbar">
-					<div>
-						<img className="logo" src={myimage} alt="papyro" />
-					</div>
+					<img className="logonavbar" src={logonavbar} alt="papyro" />
+
 					<div>
 						<Link className="links" to="/login">
 							Login

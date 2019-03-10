@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import AlbumService from '../service/AlbumService';
 // import { Redirect } from 'react-router-dom';
 import './PhotoDetail.css';
-import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class PhotoDetail extends Component {
 	constructor(props) {
@@ -33,40 +34,65 @@ class PhotoDetail extends Component {
 				photoSave: ''
 			});
 		});
+		console.log('public, antes de submit', this.state.photo.public);
+		console.log('toPrint, antes de submit', this.state.photo.toPrint);
 	}
 
 	handleOptionChange = (event) => {
-		this.setState({ ...this.state, content: event.target.value });
-		// this.state.newcontent = event.target.value;
+		this.state.content = event.target.value;
+		this.setState({ ...this.state, content: this.state.content });
 	};
 
 	handleOptionChangePublic = (event) => {
-		// this.state.newpublic = event.target.checked;
-		this.setState({ ...this.state, public: !this.state.public });
+		this.state.public = event.target.checked;
+
+		this.setState({ ...this.state, public: this.state.public });
 	};
 
 	handleOptionChangeToPrint = (event) => {
-		// this.state.newtoPrint = event.target.checked;
-		this.setState({ ...this.state, toPrint: !this.state.toPrint });
+		this.state.toPrint = event.target.checked;
+		this.setState({ ...this.state, toPrint: this.state.toPrint });
 	};
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
+		if (this.state.public === '') {
+			this.state.public = this.state.photo.public;
+		}
+		if (this.state.toPrint === '') {
+			this.state.toPrint = this.state.photo.toPrint;
+		}
+		if (this.state.content === '') {
+			this.state.public = this.state.photo.content;
+		}
+		console.log(this.state.public, this.state.toPrint, this.state.content);
 
 		this.AlbumService
 			.udatePhoto(this.state.public, this.state.toPrint, this.state.content, this.state.photo._id)
 			.then((response) => {
-				console.log(response);
+				this.setState({
+					...this.state,
+					public: '',
+					toPrint: '',
+					content: '',
+					redirect: true
+				});
 			});
 	};
 
 	render() {
+		console.log('content', this.state.content);
+		console.log('public', this.state.public);
+		console.log('toPrint', this.state.toPrint);
+		if (this.state.redirect) {
+			return <Redirect to="/allphotos" />;
+		}
 		return (
 			<div className="container-ImgAndText">
 				<div className="single-image">
 					<img src={this.state.photo.imageUrl} alt="retrato" />
 				</div>
-				<form onSubmit={this.handlerSubmit}>
+				<form className="formchangephoto" onSubmit={this.handlerSubmit}>
 					<div className="checkedcontainer">
 						<div className="blockcheckedcontainer">
 							<label class="container">

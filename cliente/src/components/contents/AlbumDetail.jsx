@@ -52,31 +52,37 @@ class AlbumDetail extends Component {
 	render() {
 		return (
 			<div className="container-album-detail">
-				<div className="titleanddescription">
-					<h1>{this.state.data.title}</h1>
-					<p>Tags: {this.state.data.description}</p>
+				<div className="albumtitleanddescription">
+					<div className="titlealbum">
+						<h2>Album's Title: {this.state.data.title}</h2>
+					</div>
+					<div className="descriptionalbum">
+						<p>Tags: {this.state.data.description}</p>
+					</div>
 				</div>
 
-				<div className="all-photos-user">
+				<div className="container-album">
 					{this.state.photos.map((photo, idx) => (
-						<div className="image-album">
-							<NavLink
-								style={{ textDecoration: 'none', color: 'black', margin: 0 }}
-								className="photo-detail"
-								to={`/photoDetail/${photo._id}`}
-								key={photo._id}
-							>
-								<div className="imageAndText">
-									<img src={photo.imageUrl} alt="alt" />
-								</div>
-							</NavLink>
-						</div>
+						<NavLink
+							style={{ textDecoration: 'none', color: 'black', margin: 0 }}
+							className="photo-detail"
+							to={`/photoDetail/${photo._id}`}
+							key={photo._id}
+						>
+							<div className="container-image">
+								<img src={photo.imageUrl} alt="alt" className="image" />
+							</div>
+						</NavLink>
 					))}
 				</div>
+
 				<div className="two-buttons">
-					<Link className="pruebaLink" to={'/albums-list'}>
-						Yours Albums
-					</Link>
+					{/* <div className="divlinkmyalbums">
+						<Link style={{ textDecoration: 'none' }} className="linkmyalbums" to={'/albums-list'}>
+							Yours Albums
+						</Link>
+					</div> */}
+
 					<AddPhoto albumid={this.props.match.params.id} userInSession={this.state.loggedInUser} />
 				</div>
 			</div>
