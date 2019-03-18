@@ -28,9 +28,9 @@ class PhotoDetail extends Component {
 			this.setState({
 				...this.state,
 				photo: photo,
-				public: '',
-				toPrint: '',
-				content: '',
+				public: photo.public,
+				toPrint: photo.toPrint,
+				content: photo.content,
 				photoSave: ''
 			});
 		});
@@ -42,14 +42,17 @@ class PhotoDetail extends Component {
 	};
 
 	handleOptionChangePublic = (event) => {
+		console.log('public', event);
 		this.state.public = event.target.checked;
-
 		this.setState({ ...this.state, public: this.state.public });
+		console.log(this.state.public);
 	};
 
 	handleOptionChangeToPrint = (event) => {
+		console.log('toprint', event);
 		this.state.toPrint = event.target.checked;
 		this.setState({ ...this.state, toPrint: this.state.toPrint });
+		console.log(this.state.toPrint);
 	};
 
 	handlerSubmit = (event) => {
@@ -95,7 +98,7 @@ class PhotoDetail extends Component {
 									type="checkbox"
 									name="public"
 									defaultChecked={this.state.photo.public}
-									onChange={(e) => this.handleOptionChangePublic(e)}
+									onClick={(e) => this.handleOptionChangePublic(e)}
 								/>
 								<span class="checkmark" />
 							</label>
@@ -107,7 +110,7 @@ class PhotoDetail extends Component {
 									type="checkbox"
 									defaultChecked={this.state.photo.toPrint}
 									name="toPrint"
-									onChange={(e) => this.handleOptionChangeToPrint(e)}
+									onClick={(e) => this.handleOptionChangeToPrint(e)}
 								/>
 								<span class="checkmark" />
 							</label>

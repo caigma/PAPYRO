@@ -17,6 +17,7 @@ import AlbumDetail from './components/contents/AlbumDetail';
 import AllPrinters from './components/contentsPrinters/AllPrinters';
 import PhotoDetail from './components/contents/PhotoDetail';
 import CreateOrder from './components/contentsPrinters/CreateOrder';
+import MyProfile from './components/auth/MyProfile';
 
 //App es la aplicación base, que se sirve del servicio AuthService para conectar con la bbdd
 class App extends Component {
@@ -89,12 +90,15 @@ class App extends Component {
 									/>
 								)}
 							/>
-
-							{/* <Route exact path="/editprofile/:id" component={EditProfile} /> */}
+							<Route
+								exact
+								path="/myprofile/:_id"
+								render={() => <MyProfile userInSession={this.state.loggedInUser} />}
+							/>
 
 							<Route
 								exact
-								path="/editprofile/"
+								path="/editprofile/:_id"
 								render={() => <EditProfile userInSession={this.state.loggedInUser} />}
 							/>
 

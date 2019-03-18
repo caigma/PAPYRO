@@ -14,6 +14,22 @@ html {
 	object-fit: cover;
 } */
 
+.container-imageprofile {
+	border-radius: 50px;
+	border: solid red;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+.imageprofile {
+	width: 100px;
+	height: 100px;
+}
+
+.myprofile {
+	color: whitesmoke;
+}
+
 .container-navbar {
 	position: fixed;
 	z-index: 1;
@@ -57,6 +73,13 @@ nav > div {
 	flex-direction: column;
 }
 
+.container-editprofile {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
 .form-signup {
 	display: flex;
 	flex-direction: column;
@@ -81,7 +104,7 @@ nav > div {
 	background-color: rgb(41, 35, 29);
 }
 .labeltexto {
-	margin: 5px 20px;
+	margin: 5px 5px;
 }
 
 .signupquestion {
@@ -136,12 +159,6 @@ input [type=submit] {
 	}
 	.navbar {
 		font-size: 10px;
-	}
-}
-
-@media (max-width: 400px) {
-	.navbar {
-		display: none;
 	}
 }
 

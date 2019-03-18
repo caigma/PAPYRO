@@ -22,6 +22,14 @@ class Navbar extends Component {
 		this.props.logout();
 	};
 
+	// <NavLink
+	// 						style={{ textDecoration: 'none', color: 'black', margin: 0 }}
+	// 						className="links"
+	// 						to={`/editprofile/:${this.state.loggedInUser._id}`}
+	// 						key={this.state.loggedInUser._id}
+	// 					>
+	// 						<div>{this.state.loggedInUser.username}'s Profile</div>
+	// 					</NavLink>
 	render() {
 		if (this.state.loggedInUser) {
 			return (
@@ -31,7 +39,7 @@ class Navbar extends Component {
 					</div>
 
 					<div>
-						<Link className="links" to="/editprofile/:_id">
+						<Link className="links" to={`/myprofile/${this.state.loggedInUser._id}`}>
 							{this.state.loggedInUser.username}'s Profile
 						</Link>
 					</div>
