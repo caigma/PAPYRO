@@ -8,8 +8,10 @@ class AuthService {
 		});
 	}
 
-	signup = (role, username, email, password) => {
-		return this.service.post('/signup', { role, username, email, password }).then((response) => response.data);
+	signup = (role, username, email, password, streetAndNumber) => {
+		return this.service
+			.post('/signup', { role, username, email, password, streetAndNumber })
+			.then((response) => response.data);
 	};
 
 	login = (email, password) => {
@@ -29,8 +31,7 @@ class AuthService {
 		email,
 		NIF,
 		telephone,
-		street,
-		numStreet,
+		streetAndNumber,
 		floor,
 		door,
 		postalCode,
@@ -44,8 +45,7 @@ class AuthService {
 				email,
 				NIF,
 				telephone,
-				street,
-				numStreet,
+				streetAndNumber,
 				floor,
 				door,
 				postalCode,

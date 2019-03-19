@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 class Signup extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { role: '', username: '', email: '', password: '', redirect: false };
+		this.state = { role: '', username: '', email: '', password: '', streetAndNumber: '', redirect: false };
 		this.service = new AuthService();
 	}
 
@@ -20,10 +20,11 @@ class Signup extends Component {
 		const username = this.state.username;
 		const email = this.state.email;
 		const password = this.state.password;
+		const streetAndNumber = this.state.streetAndNumber;
 
 		//aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
 		this.service
-			.signup(role, username, email, password)
+			.signup(role, username, email, password, streetAndNumber)
 			.then((response) => {
 				this.setState(
 					{
@@ -31,6 +32,7 @@ class Signup extends Component {
 						username: '',
 						email: '',
 						password: '',
+						streetAndNumber: '',
 						redirect: true
 					}
 					// () => {
@@ -49,6 +51,7 @@ class Signup extends Component {
 					username: username,
 					email: email,
 					password: password,
+					streetAndNumber: streetAndNumber,
 					error: true
 				});
 			});
@@ -115,6 +118,16 @@ class Signup extends Component {
 							type="password"
 							id="password"
 							name="password"
+							required="required"
+							onChange={(e) => this.handlerChange(e)}
+						/>
+					</div>
+					<div className="inputs">
+						<label className="labeltexto">Street and Number</label>
+						<input
+							type="streetAndNumber"
+							id="streetAndNumber"
+							name="streetAndNumber"
 							required="required"
 							onChange={(e) => this.handlerChange(e)}
 						/>

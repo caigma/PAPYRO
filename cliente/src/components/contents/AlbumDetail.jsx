@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AlbumService from '../service/AlbumService';
 // import { Redirect } from 'react-router-dom';
 import './AlbumDetail.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddPhoto from './AddPhoto';
 import { NavLink } from 'react-router-dom';
@@ -70,7 +70,7 @@ class AlbumDetail extends Component {
 							key={photo._id}
 						>
 							<div className="container-image">
-								<img src={photo.imageUrl} alt="alt" className="image" />
+								<img src={photo.imageUrl} alt="alt" className="imagesalbum" />
 							</div>
 						</NavLink>
 					))}

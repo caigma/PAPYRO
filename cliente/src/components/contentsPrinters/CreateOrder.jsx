@@ -52,7 +52,7 @@ class createOrder extends Component {
 	};
 
 	render() {
-		if (this.state.redirect == true) {
+		if (this.state.redirect === true) {
 			return (
 				<div className="pedidorealizo">
 					<h2>Pedido Realizado</h2>

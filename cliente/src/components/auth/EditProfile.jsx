@@ -14,8 +14,7 @@ class EditProfile extends Component {
 			email: this.props.userInSession.email,
 			NIF: this.props.userInSession.NIF,
 			telephone: this.props.userInSession.telephone,
-			street: this.props.userInSession.street,
-			numStreet: this.props.userInSession.numStreet,
+			streetAndNumber: this.props.userInSession.streetAndNumber,
 			floor: this.props.userInSession.floor,
 			door: this.props.userInSession.door,
 			postalCode: this.props.userInSession.postalCode,
@@ -35,8 +34,7 @@ class EditProfile extends Component {
 				this.state.email,
 				this.state.NIF,
 				this.state.telephone,
-				this.state.street,
-				this.state.numStreet,
+				this.state.streetAndNumber,
 				this.state.floor,
 				this.state.door,
 				this.state.postalCode,
@@ -123,27 +121,17 @@ class EditProfile extends Component {
 							/>
 						</div>
 						<div className="inputs">
-							<label className="labeltexto">Street</label>
+							<label className="labeltexto">Street and Number</label>
 							<input
-								defaultValue={this.props.userInSession.street}
-								id="street"
+								defaultValue={this.props.userInSession.streetAndNumber}
+								id="streetAndNumber"
 								type="text"
-								name="street"
+								name="streetAndNumber"
 								required
 								onChange={(e) => this.handlerChange(e)}
 							/>
 						</div>
-						<div className="inputs">
-							<label className="labeltexto">St. Number</label>
-							<input
-								defaultValue={this.props.userInSession.numStreet}
-								id="numStreet"
-								type="text"
-								name="numStreet"
-								required
-								onChange={(e) => this.handlerChange(e)}
-							/>
-						</div>
+
 						<div className="inputs">
 							<label className="labeltexto">Floor</label>
 							<input

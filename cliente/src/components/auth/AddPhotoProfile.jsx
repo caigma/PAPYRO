@@ -40,6 +40,7 @@ class AddPhotoProfile extends Component {
 				this.service.updatePhotoProfile({ imageProfile: response.imageProfile }).then((response) => {
 					console.log('updatePhotoProfile', response.imageProfile);
 				});
+				this.setState({ redirect: true });
 			})
 			.catch((err) => {
 				console.log('Error while uploading the file: ', err);
@@ -64,19 +65,30 @@ class AddPhotoProfile extends Component {
 	// 		});
 	// 	});
 	// }
+
+	refreshPage = () => {
+		window.location.reload();
+	};
+
 	render() {
-		return (
-			<div className="photoprofile">
-				<div className="photo">
-					<form>
-						<input className="button-file" type="file" onChange={(e) => this.handleFileUpload(e)} />
-					</form>
-					<div className="container-imageprofile">
-						<img className="imageprofile" src={this.state.imageProfile} alt="user profile" />
+		if (this.state.redirect) {
+			return this.refreshPage();
+			// return <Redirect to={`/myprofile/${this.props.userInSession._id}`} />;
+			// return <Redirect to="/allphotos" />;
+		} else {
+			return (
+				<div className="photoprofile">
+					<div className="photo">
+						<form>
+							<input className="button-file" type="file" onChange={(e) => this.handleFileUpload(e)} />
+						</form>
+						<div className="container-imageprofile">
+							<img className="imageprofile" src={this.state.imageProfile} alt="user profile" />
+						</div>
 					</div>
 				</div>
-			</div>
-		);
+			);
+		}
 	}
 }
 

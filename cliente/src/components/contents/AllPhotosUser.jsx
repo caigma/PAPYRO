@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './AllPhotosUser.css';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
-import myimage from '../../image/IMG_5208.JPG';
+// import myimage from '../../image/IMG_5208.JPG';
 import AlbumService from '../service/AlbumService';
 import AuthService from '../service/AuthService';
 import OrderService from '../service/OrderService';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 class AllPhotosUser extends Component {
@@ -27,7 +27,7 @@ class AllPhotosUser extends Component {
 	getPhotosUser() {
 		this.AlbumService.getAllPhotosUser(this.props.userInSession._id).then((allphotos) => {
 			allphotos.map((photo) => {
-				if (photo.content == null || photo.content == undefined) {
+				if (photo.content === null || photo.content === undefined) {
 					photo.content = '';
 				}
 			});
@@ -40,7 +40,7 @@ class AllPhotosUser extends Component {
 	}
 
 	filterPhoto = (search, toPrint) => {
-		if ((search === '' || search === undefined || search == null) && toPrint === false) {
+		if ((search === '' || search === undefined || search === null) && toPrint === false) {
 			this.getPhotosUser();
 		}
 
@@ -54,12 +54,6 @@ class AllPhotosUser extends Component {
 			}
 		});
 
-		// let onlyURLandID = [];
-		// let imagesToPrint = newState.photos;
-		// onlyURLandID = imagesToPrint.map((element) => {
-		// 	return { imageUrl: element.imageUrl, _id: element._id };
-		// });
-
 		this.setState(newState);
 
 		this.catchPhotosPrint = () => {
@@ -68,14 +62,6 @@ class AllPhotosUser extends Component {
 			this.setState(newState);
 			return;
 		};
-
-		// this.catchPhotosPrint();
-
-		// 	newState.photosToPrint = newState.photos.map
-
-		// 	this.OrderService.generateOrder(newState.photosToPrint.imageUrl)
-
-		// }
 	};
 
 	render() {
@@ -85,7 +71,7 @@ class AllPhotosUser extends Component {
 					{this.state.photos.map((photo, idx) => (
 						<div className="container-image">
 							<Link to={`/photoDetail/${photo._id}`} key={photo._id}>
-								<img src={photo.imageUrl} alt="alt" className="image" />
+								<img src={photo.imageUrl} alt="alt" className="imagesalbum" />
 							</Link>
 						</div>
 					))}

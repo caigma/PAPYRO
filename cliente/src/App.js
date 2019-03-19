@@ -116,7 +116,12 @@ class App extends Component {
 							<Route
 								exact
 								path="/printers"
-								render={() => <AllPrinters photosfromfilter={this.state.photosToPrint} />}
+								render={() => (
+									<AllPrinters
+										userInSession={this.state.loggedInUser}
+										photosfromfilter={this.state.photosToPrint}
+									/>
+								)}
 							/>
 							<Route
 								exact
@@ -145,6 +150,17 @@ class App extends Component {
 						<Switch>
 							{/* <Home userInSession={this.state.loggedInUser} /> */}
 							<Route exact path="/allorders" component={AllOrders} />
+							<Route
+								exact
+								path="/myprofile/:_id"
+								render={() => <MyProfile userInSession={this.state.loggedInUser} />}
+							/>
+
+							<Route
+								exact
+								path="/editprofile/:_id"
+								render={() => <EditProfile userInSession={this.state.loggedInUser} />}
+							/>
 						</Switch>
 					</div>
 				);

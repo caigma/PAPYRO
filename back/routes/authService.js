@@ -3,6 +3,7 @@ const passport = require('passport');
 const router = express.Router();
 const User = require('../models/User');
 const uploader = require('../config/cloudinary');
+const fetch = require('node-fetch');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
@@ -42,8 +43,7 @@ router.put('/profile/update', (req, res, next) => {
 			email: req.body.email,
 			NIF: req.body.NIF,
 			telephone: req.body.telephone,
-			street: req.body.street,
-			numStreet: req.body.numStreet,
+			streetAndNumber: req.body.streetAndNumber,
 			floor: req.body.floor,
 			door: req.body.door,
 			postalCode: req.body.postalCode,
@@ -77,15 +77,6 @@ router.post('/upload', uploader.single('imageProfile'), (req, res, next) => {
 	res.json({ imageProfile: req.file.secure_url });
 });
 
-// router.put('/profile/photo', uploadCloud.single('photo'), (req, res, next) => {
-// 	console.log('req.file.secure_url', req.file.secure_url);
-// 	const imageUrl = req.file.secure_url;
-// 	console.log('req.file.secure_url', req.file.secure_url);
-// 	User.findByIdAndUpdate({ _id: req.body.ownerId }, { imageProfile: imageUrl }, { new: true }).then((photo) => {
-// 		res.json(photo);
-// 	});
-// });
-
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', (err, theUser, failureDetails) => {
 		if (err) {
@@ -118,9 +109,10 @@ router.post('/login', (req, res, next) => {
 // });
 
 router.post('/signup', (req, res, next) => {
-	const { role, username, email, password } = req.body;
+	const { role, username, email, password, streetAndNumber } = req.body;
+	console.log('en router sigun', role, username, email, password, streetAndNumber);
 
-	if (role === '' || username === '' || email === '' || password === '') {
+	if (role === '' || username === '' || email === '' || password === '' || streetAndNumber === '') {
 		res.status(400).json({ message: 'Provide username and password' });
 		return;
 	}
@@ -139,34 +131,70 @@ router.post('/signup', (req, res, next) => {
 		const salt = bcrypt.genSaltSync(bcryptSalt);
 		const hashPass = bcrypt.hashSync(password, salt);
 
-		const newUser = new User({
-			role: role,
-			username: username,
-			email: email,
-			password: hashPass
-		});
+		fetch(
+			`https://maps.googleapis.com/maps/api/geocode/json?address=${req.body.streetAndNumber}&key=${process.env
+				.API_KEY}`
+		)
+			.then((response) => {
+				return response.json();
+			})
+			.then((myJson) => {
+				const lat = myJson.results[0].geometry.location.lat;
+				const lng = myJson.results[0].geometry.location.lng;
 
-		newUser.save((err) => {
-			if (err) {
-				res.status(400).json({ message: 'Saving user to database went wrong.' });
-				return;
-			}
-
-			// Automatically log in user after sign up
-			// .login() here is actually predefined passport method
-			req.login(newUser, (err) => {
-				if (err) {
-					res.status(500).json({ message: 'Login after signup went bad.' });
-					return;
-				}
-
-				// Send the user's information to the frontend
-				// We can use also: res.status(200).json(req.user);
-				res.status(200).json(newUser);
+				User.create({
+					email,
+					password: hashPass,
+					username,
+					streetAndNumber,
+					coordinates: {
+						type: 'Point',
+						coords: {
+							lat,
+							lng
+						}
+					},
+					role
+				})
+					.then(() => {
+						res.redirect('/');
+					})
+					.catch((err) => {
+						res.render('auth/signup', { message: 'Something went wrong' });
+					});
 			});
-		});
 	});
 });
+
+// 			  const newUser = new User({
+// 			role: role,
+// 			username: username,
+// 			email: email,
+// 			password: hashPass,
+// 			streetAndNumber: streetAndNumber
+// 		});
+
+// 		newUser.save((err) => {
+// 			if (err) {
+// 				res.status(400).json({ message: 'Saving user to database went wrong.' });
+// 				return;
+// 			}
+
+// 			// Automatically log in user after sign up
+// 			// .login() here is actually predefined passport method
+// 			req.login(newUser, (err) => {
+// 				if (err) {
+// 					res.status(500).json({ message: 'Login after signup went bad.' });
+// 					return;
+// 				}
+
+// 				// Send the user's information to the frontend
+// 				// We can use also: res.status(200).json(req.user);
+// 				res.status(200).json(newUser);
+// 			});
+// 		});
+// 	});
+// });
 
 router.get('/logout', (req, res, next) => {
 	// req.logout() is defined by passport

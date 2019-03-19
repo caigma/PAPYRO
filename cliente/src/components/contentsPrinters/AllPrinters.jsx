@@ -11,48 +11,35 @@ class AllPrinters extends Component {
 		super(props);
 		this.state = {
 			printers: [],
-			photosToPrint: this.props.photosfromfilter
+			photosToPrint: this.props.photosfromfilter,
+			loggedInUser: this.props.userInSession
 		};
 
 		this.PrinterService = new PrinterService();
 		this.service = new AuthService();
-		// this.fetchUser();
+
 		this.getOnlyPrinters();
-		// this.filterAlbumUser();
 	}
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({ ...this.state, loggedInUser: nextProps['userInSession'] });
 	}
 
-	// componentWillMount = () => {
-	// 	console.log('WILLL');
-	// 	if (this.props.location) {
-	// 		this.setState({ ...this.state, photosToPrint: this.state.location }, () => {
-	// 			console.log(this.props);
+	// fetchUser() {
+	// 	this.service
+	// 		.loggedin()
+	// 		.then((response) => {
+	// 			this.setState({
+	// 				...this.state,
+	// 				loggedInUser: response
+	// 			});
+	// 		})
+	// 		.catch((err) => {
+	// 			this.setState({
+	// 				loggedInUser: false
+	// 			});
 	// 		});
-	// 	}
-	// };
-	// componentDidMount() {
-	// 	const photos = this.props.location.state;
-	// 	console.log(photos);
 	// }
-
-	fetchUser() {
-		this.service
-			.loggedin()
-			.then((response) => {
-				this.setState({
-					...this.state,
-					loggedInUser: response
-				});
-			})
-			.catch((err) => {
-				this.setState({
-					loggedInUser: false
-				});
-			});
-	}
 
 	getOnlyPrinters = () => {
 		this.PrinterService
@@ -66,17 +53,7 @@ class AllPrinters extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	// filterAlbumUser = () => {
-	// 	const newState = { ...this.state };
-	// 	newState.albums = this.state.albums.filter((album) => {
-	// 		return album.owner === this.state.loggedInUser._id;
-	// 	});
-	// 	this.setState = newState;
-	// };
-
 	render() {
-		console.log('en printers this.state.photosToPrint,', this.state.photosToPrint);
-		console.log('en printers this.state.loggedinuser,', this.state.loggedInUser);
 		return this.state.printers ? (
 			<div className="printer-list">
 				<h3>Choose your Printer</h3>
@@ -100,7 +77,9 @@ class AllPrinters extends Component {
 						</NavLink>
 					</div>
 				))}
-				<Maps />
+				<div className="map">
+					<Maps userInSession={this.props.userInSession} allPrinters={this.state.printers} />
+				</div>
 			</div>
 		) : (
 			<p>loading</p>

@@ -37,35 +37,41 @@ class PhotoDetail extends Component {
 	}
 
 	handleOptionChange = (event) => {
-		this.state.content = event.target.value;
-		this.setState({ ...this.state, content: this.state.content });
+		const newState = { ...this.state, content: event.target.value };
+		// this.state.content = event.target.value;
+		this.setState(newState);
+		// this.setState({ ...this.state, content: this.state.content });
 	};
 
 	handleOptionChangePublic = (event) => {
 		console.log('public', event);
-		this.state.public = event.target.checked;
-		this.setState({ ...this.state, public: this.state.public });
+		const newState = { ...this.state, public: event.target.checked };
+		// this.state.public = event.target.checked;
+		this.setState(newState);
+		// this.setState({ ...this.state, public: this.state.public });
 		console.log(this.state.public);
 	};
 
 	handleOptionChangeToPrint = (event) => {
 		console.log('toprint', event);
-		this.state.toPrint = event.target.checked;
-		this.setState({ ...this.state, toPrint: this.state.toPrint });
+		const newState = { ...this.state, toPrint: event.target.checked };
+		// this.state.toPrint = event.target.checked;
+		this.setState(newState);
+		// this.setState({ ...this.state, toPrint: this.state.toPrint });
 		console.log(this.state.toPrint);
 	};
 
 	handlerSubmit = (event) => {
 		event.preventDefault();
-		if (this.state.public === '') {
-			this.state.public = this.state.photo.public;
-		}
-		if (this.state.toPrint === '') {
-			this.state.toPrint = this.state.photo.toPrint;
-		}
-		if (this.state.content === '') {
-			this.state.content = this.state.photo.content;
-		}
+		// if (this.state.public === '') {
+		// 	this.state.public = this.state.photo.public;
+		// }
+		// if (this.state.toPrint === '') {
+		// 	this.state.toPrint = this.state.photo.toPrint;
+		// }
+		// if (this.state.content === '') {
+		// 	this.state.content = this.state.photo.content;
+		// }
 
 		this.AlbumService
 			.udatePhoto(this.state.public, this.state.toPrint, this.state.content, this.state.photo._id)

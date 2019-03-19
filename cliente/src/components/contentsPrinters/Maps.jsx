@@ -1,62 +1,126 @@
 import React from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import Geocode from 'react-geocode';
+// import { Link } from 'react-router-dom';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+
+const { MarkerClusterer } = require('react-google-maps/lib/components/addons/MarkerClusterer');
 
 const MapWithAMarker = withScriptjs(
 	withGoogleMap((props) => (
 		<GoogleMap
-			defaultZoom={8}
-			defaultCenter={{ lat: 40.392226, lng: -3.6998982 }}
-			//PONER AQUÍ LA DIRECCIÓN DEL USUARIO
+			defaultZoom={12}
+			defaultCenter={{
+				lat: props.posicion.loggedInUser.coordinates.coords.lat,
+				lng: props.posicion.loggedInUser.coordinates.coords.lng
+			}}
 		>
-			<Marker position={{ lat: 40.392226, lng: -3.6998982 }} />
+			<MarkerClusterer averageCenter enableRetinaIcons gridSize={60}>
+				{props.filter.map((marker) => (
+					<Marker
+						key={marker.username}
+						position={{
+							lat: marker.coordinates.coords.lat,
+							lng: marker.coordinates.coords.lng
+						}}
+						onClick={() => {
+							props.handleMarkerClick({ company: marker.username });
+						}}
+					>
+						{props.openInfoWindows[marker.username] && (
+							<InfoWindow onCloseClick={() => props.handleCloseInfoWindow({ company: marker.username })}>
+								<div>
+									<div>{marker.username}</div>
+									<div>{marker.streetAndNumber}</div>
+								</div>
+							</InfoWindow>
+						)}
+					</Marker>
+				))}
+			</MarkerClusterer>
+			<Marker
+				position={{
+					lat: props.posicion.loggedInUser.coordinates.coords.lat,
+					lng: props.posicion.loggedInUser.coordinates.coords.lng
+				}}
+				onClick={() => props.handleMarkerClick({ a: true })}
+			>
+				<InfoWindow onCloseClick={props.onToggleOpen}>
+					<div>
+						<h5>Tu estás aquí</h5>
+					</div>
+				</InfoWindow>
+			</Marker>
 		</GoogleMap>
 	))
 );
 
-export default class Maps extends React.PureComponent {
+export default class Maps extends React.Component {
 	state = {
 		isMarkerShown: false,
-		loggedInUser: null
+		loggedInUser: false,
+		allPrintersMap: null,
+		openInfoWindows: undefined
 	};
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({ ...this.state, loggedInUser: nextProps['userInSession'] });
+		// const API_KEY = process.env.GOOGLEMAP_API_KEY; const script = document.createElement('script');
+		// script.src = https://maps.googleapis.com/maps/api/js?key=${API_KEY};
+		// document.head.append(script);
+
+		let openInfoWindowsObj = {};
+
+		for (var key in nextProps['allPrinters']) {
+			openInfoWindowsObj[nextProps['allPrinters'][key].empresa] = false;
+		}
+
+		this.setState({
+			...this.state,
+			loggedInUser: nextProps['userInSession'],
+			allPrintersMap: nextProps['allPrinters'],
+			openInfoWindows: openInfoWindowsObj
+		});
 	}
 
-	componentDidMount() {
-		this.delayedShowMarker();
-	}
+	handleMarkerClick = (e) => {
+		var openInfoWindowsCloned = { ...this.state.openInfoWindows };
 
-	delayedShowMarker = () => {
-		setTimeout(() => {
-			this.setState({ isMarkerShown: true });
-		}, 3000);
+		openInfoWindowsCloned[e.company] = true;
+
+		this.setState({
+			...this.state,
+			isMarkerShown: false,
+			openInfoWindows: openInfoWindowsCloned
+		});
 	};
 
-	handleMarkerClick = () => {
-		this.setState({ isMarkerShown: false });
-		this.delayedShowMarker();
-	};
+	handleCloseInfoWindow = (e) => {
+		var openInfoWindowsCloned = { ...this.state.openInfoWindows };
 
-	// Geocode.fromLatLng("48.8583701", "2.2922926").then(
-	//     response => {
-	//       const address = response.results[0].formatted_address;
-	//       console.log(address);
-	//     },
-	//     error => {
-	//       console.error(error);
-	//     }
-	//   );
+		openInfoWindowsCloned[e.company] = false;
+
+		this.setState({
+			...this.state,
+			isMarkerShown: false,
+			openInfoWindows: openInfoWindowsCloned
+		});
+	};
 
 	render() {
-		return (
-			<MapWithAMarker
-				googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzW2O8kun6MFHbsvAL0nc7lOdmLw924LQ&v=3.exp&libraries=geometry,drawing,places"
-				loadingElement={<div style={{ height: `100%` }} />}
-				containerElement={<div style={{ height: `400px` }} />}
-				mapElement={<div style={{ height: `100%` }} />}
-			/>
+		return this.state.loggedInUser ? (
+			<div>
+				<MapWithAMarker
+					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzW2O8kun6MFHbsvAL0nc7lOdmLw924LQ&v=3.exp&libraries=geometry,drawing,places"
+					loadingElement={<div style={{ height: `100%` }} />}
+					containerElement={<div style={{ height: `400px` }} />}
+					mapElement={<div style={{ height: `100%` }} />}
+					openInfoWindows={this.state.openInfoWindows}
+					handleCloseInfoWindow={this.handleCloseInfoWindow}
+					posicion={this.state}
+					filter={this.state.allPrintersMap}
+					handleMarkerClick={this.handleMarkerClick}
+				/>
+			</div>
+		) : (
+			<p>No estás logueado</p>
 		);
 	}
 }

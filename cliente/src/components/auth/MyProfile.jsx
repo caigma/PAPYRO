@@ -36,7 +36,7 @@ class MyProfile extends Component {
 						</ul>
 						<ul>
 							Address Info:
-							<li>Street: {this.props.userInSession.street}</li>
+							<li>Street and Number: {this.props.userInSession.streetAndNumber}</li>
 							<li>Floor: {this.props.userInSession.floor}</li>
 							<li>Door: {this.props.userInSession.door}</li>
 							<li>Postal Code: {this.props.userInSession.postalCode}</li>

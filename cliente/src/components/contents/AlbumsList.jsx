@@ -59,8 +59,9 @@ class AlbumsList extends Component {
 						</NavLink>
 					</div>
 				))}
-
-				<Link to="add-album">Add Album</Link>
+				<div className="addAlbum">
+					<Link to="add-album">Add Album</Link>
+				</div>
 			</div>
 		);
 	}
